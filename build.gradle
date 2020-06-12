@@ -19,6 +19,15 @@ dependencies {
     modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
     testImplementation 'com.google.code.findbugs:jsr305:3.0.2'
     modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.1.16-pre4"
+    // Adds an implementation dependency on the entity module
+    modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-pre4"
+}
+repositories {
+    maven {
+        name = "Ladysnake Libs"
+        url = 'https://dl.bintray.com/ladysnake/libs'
+    }
 }
 
 processResources {
