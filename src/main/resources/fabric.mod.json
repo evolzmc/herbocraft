@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "herbocraft",
+  "version": "${version}",
+  "name": "herbocraft",
+  "description": "A mod where you mix a towerdefense with minecraft and genetics",
+  "authors": [
+    "EvolzMC Team <Blooskyd",
+    "Ziedelth",
+    "Redblueflame>"
+  ],
+  "contact": {
+    "homepage": "https://evolzmc.fr",
+    "sources": "https://github.com/evolzmc/herbocraft"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/herbocraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.redblueflame.herbocraft.HerboCraft"
+    ],
+    "client": [
+      "com.redblueflame.herbocraft.HerboCraftClient"
+    ]
+  },
+  "mixins": [
+    "herbocraft.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.7+build.201",
+    "fabric": "*",
+    "minecraft": "1.16-pre4"
+  }
+}
