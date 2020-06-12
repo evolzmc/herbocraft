@@ -1,10 +1,11 @@
 {
   "required": true,
-  "package": "com.redblueflame.herbocraft.mixin",
+  "package": "com.redblueflame.herbocraft.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
+    "EntitySpawningHandlingMixin"
   ],
   "injectors": {
     "defaultRequire": 1
