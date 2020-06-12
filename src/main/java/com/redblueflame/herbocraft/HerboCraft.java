@@ -79,7 +79,7 @@ public class HerboCraft implements ModInitializer {
 
                     if (!cropBlock.isMature(state)) {
                         cropBlock.randomTick(state, (ServerWorld) world, pos, world.random);
-                        stack.damage(10, world.random, player);
+                        player.inventory.getMainHandStack().damage(5, world.random, player);
 
                         PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                         passedData.writeBlockPos(pos);
