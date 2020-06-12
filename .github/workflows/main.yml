@@ -18,7 +18,7 @@ jobs:
             ${{ runner.os }}-gradle-          
       - uses: eskatos/gradle-command-action@v1
         with:
-          gradle-version: wrapper
+          gradle-version: 6.4.1
           arguments: build
       - uses: actions/upload-artifact@v2
         with:
