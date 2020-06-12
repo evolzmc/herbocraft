@@ -1,4 +1,18 @@
 {
 	"itemGroup.herbocraft.herbo_group": "HerboCraft",
-	"item.herbocraft.watering_can": "Watering Can"
+	"item.herbocraft.watering_can": "Watering Can",
+	"item.herbocraft.turret_seed": "Turret Seed",
+	"level_tooltips.health": "Health: %d",
+	"level_tooltips.attack_speed": "Attack Speed: %d",
+	"level_tooltips.damage": "Damage: %d",
+	"level_tooltips.durability": "Seed Quality: %d",
+	"level_tooltips.stability": "Mutability: %d",
+	"level_tooltips.stability.none": "None",
+	"level_tooltips.stability.ultra-low": "Extremely low",
+	"level_tooltips.stability.low": "Low",
+	"level_tooltips.stability.med": "Medium",
+	"level_tooltips.stability.high": "High",
+	"level_tooltips.stability.extreme": "Extreme",
+	"level_tooltips.stability.unknown": "Unknown",
+	"level_tooltips.sterile.true": "Sterile !"
 }

@@ -25,7 +25,7 @@ public class TurretBaseEntityModel extends EntityModel<TurretBaseEntity> {
 
         Base = new ModelPart(this);
         Base.setPivot(0.0F, 24.0F, 0.0F);
-
+        setRotationAngle(Base, 0, -45, 0);
 
         Tige = new ModelPart(this);
         Tige.setPivot(0.0F, 0.0F, 0.0F);
@@ -109,7 +109,6 @@ public class TurretBaseEntityModel extends EntityModel<TurretBaseEntity> {
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         // translate model down
         matrices.translate(0, 0, 0);
-
         // render cube
         Base.render(matrices, vertices, light, overlay);
     }

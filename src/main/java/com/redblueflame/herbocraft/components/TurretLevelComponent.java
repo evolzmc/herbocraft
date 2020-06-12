@@ -1,10 +1,13 @@
 package com.redblueflame.herbocraft.components;
 
+import com.redblueflame.herbocraft.HerboCraft;
+import nerdhub.cardinal.components.api.ComponentType;
+import nerdhub.cardinal.components.api.component.extension.CopyableComponent;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.Random;
 
-public class TurretLevelComponent implements LevelComponent
+public class TurretLevelComponent implements LevelComponent, CopyableComponent<LevelComponent>
 {
     private int health = 5;
     private float attackSpeed = 1;
@@ -102,5 +105,20 @@ public class TurretLevelComponent implements LevelComponent
         tag.putInt("Stability", this.stability);
         tag.putBoolean("Sterile", this.sterile);
         return tag;
+    }
+
+    @Override
+    public ComponentType<LevelComponent> getComponentType() {
+        return HerboCraft.LEVELLING;
+    }
+
+    @Override
+    public void copyFrom(LevelComponent other) {
+        this.health = other.getHealth();
+        this.durability = other.getDurability();
+        this.damage = other.getDamage();
+        this.attackSpeed = other.getAttackSpeed();
+        this.sterile = other.isSterile();
+        this.stability = other.getStability();
     }
 }
