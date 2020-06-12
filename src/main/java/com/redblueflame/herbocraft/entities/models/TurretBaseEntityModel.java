@@ -8,12 +8,14 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class TurretBaseEntityModel extends EntityModel<TurretBaseEntity> {
     private final ModelPart base;
+
     public TurretBaseEntityModel() {
         this.textureHeight = 64;
         this.textureWidth = 64;
         base = new ModelPart(this, 0, 0);
         base.addCuboid(-6, -6, -6, 12, 12, 12);
     }
+
     @Override
     public void setAngles(TurretBaseEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
