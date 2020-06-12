@@ -1,6 +1,5 @@
 package com.redblueflame.herbocraft.entities.ai.goal;
 
-import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
@@ -27,7 +26,7 @@ public class TrackingGoal<T extends LivingEntity> extends TrackTargetGoal {
         this(mob, targetClass, 10, checkVisibility, checkCanNavigate, (Predicate)null);
     }
 
-    public TrackingGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
+    public TrackingGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, Predicate<LivingEntity> targetPredicate) {
         super(mob, checkVisibility, checkCanNavigate);
         this.targetClass = targetClass;
         this.reciprocalChance = reciprocalChance;
@@ -62,7 +61,7 @@ public class TrackingGoal<T extends LivingEntity> extends TrackTargetGoal {
         super.start();
     }
 
-    public void setTargetEntity(@Nullable LivingEntity targetEntity) {
+    public void setTargetEntity(LivingEntity targetEntity) {
         this.targetEntity = targetEntity;
     }
 }
