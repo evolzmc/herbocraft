@@ -23,7 +23,7 @@ public class TrackingGoal<T extends LivingEntity> extends TrackTargetGoal {
     }
 
     public TrackingGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility, boolean checkCanNavigate) {
-        this(mob, targetClass, 10, checkVisibility, checkCanNavigate, (Predicate)null);
+        this(mob, targetClass, 10, checkVisibility, checkCanNavigate, (Predicate) null);
     }
 
     public TrackingGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, Predicate<LivingEntity> targetPredicate) {
