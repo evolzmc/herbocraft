@@ -1,6 +1,11 @@
 package com.redblueflame.herbocraft.entities;
 
+import com.redblueflame.herbocraft.HerboCraft;
+import com.redblueflame.herbocraft.components.EntityTurretComponent;
+import com.redblueflame.herbocraft.components.TurretLevelComponent;
 import com.redblueflame.herbocraft.entities.ai.goal.TrackingGoal;
+import nerdhub.cardinal.components.api.component.Component;
+import nerdhub.cardinal.components.api.component.ComponentContainer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -52,7 +57,9 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
         super.initDataTracker();
         this.dataTracker.startTracking(TURRET_BASE_FLAGS, (byte) 16);
     }
-
+    public void initComponents(ComponentContainer<Component> components) {
+        components.put(HerboCraft.LEVELLING, new EntityTurretComponent(this, (short) 5));
+    }
     @Override
     public void attack(LivingEntity target, float pullProgress) {
         BulletEntity bulletEntity = BulletEntity.getWithOwner(this.world, this, 40f);

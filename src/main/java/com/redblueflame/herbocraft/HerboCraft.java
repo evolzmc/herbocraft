@@ -4,6 +4,7 @@ import com.redblueflame.herbocraft.components.LevelComponent;
 import com.redblueflame.herbocraft.components.TurretLevelComponent;
 import com.redblueflame.herbocraft.entities.BulletEntity;
 import com.redblueflame.herbocraft.entities.TurretBaseEntity;
+import com.redblueflame.herbocraft.items.TurretAnalyzer;
 import com.redblueflame.herbocraft.items.TurretSeed;
 import com.redblueflame.herbocraft.items.WateringCanItem;
 import io.netty.buffer.Unpooled;
@@ -71,6 +72,7 @@ public class HerboCraft implements ModInitializer {
     public static final ItemGroup HERBO_GROUP = FabricItemGroupBuilder.create(new Identifier(name, "herbo_group")).icon(() -> new ItemStack(Items.GHAST_TEAR)).build();
     public static final Item WATERING_CAN = new WateringCanItem(new Item.Settings().group(HERBO_GROUP).maxCount(1).maxDamage(10));
     public static final Item TURRET_SEED = new TurretSeed(new Item.Settings().group(HERBO_GROUP).maxCount(64));
+    public static final Item TURRET_ANALYSER = new TurretAnalyzer(new Item.Settings().group(HERBO_GROUP).maxCount(1));
     //endregion
 
     //region Components
@@ -79,9 +81,12 @@ public class HerboCraft implements ModInitializer {
     //endregion
     @Override
     public void onInitialize() {
+        // Register Items
         FabricDefaultAttributeRegistry.register(TURRET_BASE, TurretBaseEntity.createBaseTurretAttributes());
         Registry.register(Registry.ITEM, new Identifier(name, "watering_can"), WATERING_CAN);
         Registry.register(Registry.ITEM, new Identifier(name, "turret_seed"), TURRET_SEED);
+        Registry.register(Registry.ITEM, new Identifier(name, "turret_analyser"), TURRET_ANALYSER);
+
         ServerSidePacketRegistry.INSTANCE.register(WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();
             ItemStack stack = packetByteBuf.readItemStack();
@@ -109,7 +114,7 @@ public class HerboCraft implements ModInitializer {
         });
 
         // Register turret Levelling system
-        EntityComponentCallback.event(TurretBaseEntity.class).register((turret, components) -> components.put(LEVELLING, TurretLevelComponent.getRandomStats((short) 5)));
+        EntityComponentCallback.event(TurretBaseEntity.class).register(TurretBaseEntity::initComponents);
         ItemComponentCallback.event(TURRET_SEED).register((stack, components) -> components.put(LEVELLING, TurretLevelComponent.getRandomStats((short) 5)));
     }
 

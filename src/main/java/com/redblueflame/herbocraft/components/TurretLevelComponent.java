@@ -18,24 +18,27 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
 
     public static TurretLevelComponent getRandomStats(short level) {
         TurretLevelComponent comp = new TurretLevelComponent();
+        comp.addRandomStats(level);
+        return comp;
+    }
+    public void addRandomStats(short level) {
         Random rdm = new Random();
         for (int i = 0; i < level; i++) {
             switch (rdm.nextInt(4)) {
                 case 0:
-                    comp.addLevelToStat("Health");
+                    this.addLevelToStat("Health");
                     break;
                 case 1:
-                    comp.addLevelToStat("AttackSpeed");
+                    this.addLevelToStat("AttackSpeed");
                     break;
                 case 2:
-                    comp.addLevelToStat("Damage");
+                    this.addLevelToStat("Damage");
                     break;
                 case 3:
-                    comp.addLevelToStat("Durability");
+                    this.addLevelToStat("Durability");
                     break;
             }
         }
-        return comp;
     }
 
     private void addLevelToStat(String name) {
