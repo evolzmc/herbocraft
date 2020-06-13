@@ -108,8 +108,7 @@ public class TurretBaseEntityModel extends EntityModel<TurretBaseEntity> {
     }
     @Override
     public void setAngles(TurretBaseEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        tete.yaw = (headYaw * 0.017453292F) - 1.570796F;
-        tete.roll = (headPitch * 0.017453292F);
+        setRotationAngle(tete, 0, (headYaw * 0.017453292F) - 1.570796F, (headPitch * 0.017453292F));
     }
 
     @Override

@@ -28,6 +28,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -84,7 +85,7 @@ public class HerboCraft implements ModInitializer {
         Registry.register(Registry.ITEM, new Identifier(name, "turret_seed"), TURRET_SEED);
         Registry.register(Registry.ITEM, new Identifier(name, "turret_analyser"), TURRET_ANALYSER);
 
-        ServerSidePacketRegistry.INSTANCE.register(WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
+        ServerSidePacketRegistry.INSTANCE.register(HerboCraftPackets.WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();
             Hand hand = packetByteBuf.readBoolean() ? Hand.MAIN_HAND : Hand.OFF_HAND;
 

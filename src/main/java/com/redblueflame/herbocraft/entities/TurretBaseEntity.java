@@ -6,9 +6,11 @@ import com.redblueflame.herbocraft.components.TurretLevelComponent;
 import com.redblueflame.herbocraft.entities.ai.goal.TrackingGoal;
 import nerdhub.cardinal.components.api.component.Component;
 import nerdhub.cardinal.components.api.component.ComponentContainer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.ai.control.BodyControl;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -71,5 +73,25 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
         bulletEntity.setVelocity(e, f + (double) h, g, 1.2F, 12.0F);
         this.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.world.spawnEntity(bulletEntity);
+    }
+
+    @Override
+    public boolean canMoveVoluntarily() {
+        return false;
+    }
+
+    @Override
+    public void pushAwayFrom(Entity entity) {
+        // Do nothing, this shouldn't move
+    }
+
+    @Override
+    public boolean cannotDespawn() {
+        return true;
+    }
+
+    @Override
+    public void takeKnockback(float f, double d, double e) {
+        // Do nothing, this shouldn't get any knockback
     }
 }
