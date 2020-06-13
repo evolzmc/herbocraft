@@ -28,10 +28,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 import net.minecraft.text.LiteralText;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -46,9 +46,6 @@ import java.util.stream.Stream;
 public class HerboCraft implements ModInitializer {
     public static final String name = "herbocraft";
     public static final int WATERING_CAN_MAX_PARTICLES = 10;
-
-    public static final Identifier WATERING_CAN_USAGE_PACKET = new Identifier(name, "watering_can_usage");
-    public static final Identifier WATERING_PARTICLE_PACKET = new Identifier(name, "watering_particle");
 
     /**
      * Registers the turret with the ID "herbocraft:turret_base"
@@ -89,7 +86,7 @@ public class HerboCraft implements ModInitializer {
 
         ServerSidePacketRegistry.INSTANCE.register(WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();
-            ItemStack stack = packetByteBuf.readItemStack();
+            Hand hand = packetByteBuf.readBoolean() ? Hand.MAIN_HAND : Hand.OFF_HAND;
 
             packetContext.getTaskQueue().execute(() -> {
                 ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
@@ -102,12 +99,15 @@ public class HerboCraft implements ModInitializer {
                     CropBlock cropBlock = (CropBlock) block;
 
                     if (!cropBlock.isMature(state)) {
-                        cropBlock.randomTick(state, (ServerWorld) world, pos, world.random);
-                        stack.damage(10, world.random, player);
+                        ItemStack inHandStack = hand.equals(Hand.MAIN_HAND) ? player.getMainHandStack() : player.getOffHandStack();
+                        if (inHandStack.getDamage() >= inHandStack.getMaxDamage()) return;
+                        inHandStack.damage(1, world.random, player);
 
                         PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
                         passedData.writeBlockPos(pos);
-                        watchingPlayers.forEach(players -> ServerSidePacketRegistry.INSTANCE.sendToPlayer(players, WATERING_PARTICLE_PACKET, passedData));
+                        watchingPlayers.forEach(players -> ServerSidePacketRegistry.INSTANCE.sendToPlayer(players, HerboCraftPackets.WATERING_PARTICLE_PACKET, passedData));
+
+                        cropBlock.randomTick(state, (ServerWorld) world, pos, world.random);
                     }
                 }
             });
