@@ -23,12 +23,29 @@ dependencies {
     // Adds an implementation dependency on the entity module
     modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-pre4"
     modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:2.4.0-nightly.1.16-pre4"
+    modCompile "com.github.vini2003:spinnery:${project.spinnery_version}"
+    include "com.github.vini2003:spinnery:${project.spinnery_version}"
+    /* this will expose the dependency to anyone building against your mod. You might
+     want to set this to modImplementation for production */
+    modApi  "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+    modRuntime ("com.github.Chocohead:Data-Breaker-Lower:24be1a2")
+    /* this will package cotton-resources in your jar. skip if you don't want this */
+    include "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
 }
 repositories {
     maven {
         name = "Ladysnake Libs"
         url = 'https://dl.bintray.com/ladysnake/libs'
     }
+    maven {
+        name = "Spinnery"
+        url  "https://dl.bintray.com/spinnery/Spinnery"
+    }
+    maven {
+        name = "Cotton"
+        url = "https://server.bbkr.space/artifactory/libs-release/"
+    }
+    maven { url = "https://jitpack.io" }
 }
 
 processResources {
@@ -55,6 +72,7 @@ tasks.withType(JavaCompile) {
 // if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
+    //noinspection GrDeprecatedAPIUsage
     classifier = "sources"
     from sourceSets.main.allSource
 }

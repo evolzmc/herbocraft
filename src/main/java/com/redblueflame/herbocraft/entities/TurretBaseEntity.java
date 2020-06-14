@@ -50,9 +50,7 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     protected void initGoals() {
         this.goalSelector.add(1, new ProjectileAttackGoal(this, 0D, 10, 20.0F));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.targetSelector.add(1, new TrackingGoal<>(this, MobEntity.class, 10, true, false, (livingEntity) -> {
-            return livingEntity instanceof Monster;
-        }));
+        this.targetSelector.add(1, new TrackingGoal<>(this, MobEntity.class, 10, true, false, (livingEntity) -> livingEntity instanceof Monster));
     }
 
     protected void initDataTracker() {
@@ -77,12 +75,32 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
 
     @Override
     public boolean canMoveVoluntarily() {
-        return false;
+        return true;
+    }
+
+    @Override
+    protected void pushAway(Entity entity) {
+        // Do nothing at all
     }
 
     @Override
     public void pushAwayFrom(Entity entity) {
         // Do nothing, this shouldn't move
+    }
+
+    @Override
+    public boolean canBeLeashedBy(PlayerEntity player) {
+        return false;
+    }
+
+    @Override
+    public void onPlayerCollision(PlayerEntity player) {
+        // Do nothing.
+    }
+
+    @Override
+    public boolean isPushable() {
+        return false;
     }
 
     @Override
