@@ -10,4 +10,5 @@ public interface LevelComponent extends Component {
     int getDurability();
     int getStability();
     boolean isSterile();
+    void setSterile(boolean sterile);
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbocraft:block/sterilizer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbocraft:block/sterilizer"
+    },
+    "facing=south": {
+      "model": "herbocraft:block/sterilizer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbocraft:block/sterilizer",
+      "y": 270
+    }
+  }
+}

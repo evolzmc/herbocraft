@@ -3,6 +3,7 @@
 	"item.herbocraft.watering_can": "Watering Can",
 	"item.herbocraft.turret_seed": "Turret Seed",
 	"item.herbocraft.turret_analyser": "Turret Analyser",
+	"block.herbocraft.sterilizer": "Plant Sterilizer",
 	"level_tooltips.health": "Health: %d",
 	"level_tooltips.attack_speed": "Attack Speed: %d",
 	"level_tooltips.damage": "Damage: %d",

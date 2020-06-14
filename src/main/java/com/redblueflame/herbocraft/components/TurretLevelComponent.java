@@ -88,6 +88,11 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         return sterile;
     }
 
+    @Override
+    public void setSterile(boolean sterile) {
+        this.sterile = sterile;
+    }
+
 
     @Override
     public void fromTag(CompoundTag tag) {
