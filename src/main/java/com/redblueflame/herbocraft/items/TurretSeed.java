@@ -18,6 +18,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -37,7 +38,9 @@ public class TurretSeed extends Item {
         super.appendTooltip(stack, world, lines, ctx);
         LevelComponent comp = HerboCraft.LEVELLING.get(stack);
         lines.add(new TranslatableText("level_tooltips.health", comp.getHealth()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
-        lines.add(new TranslatableText("level_tooltips.attack_speed", comp.getAttackSpeed()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+
+        lines.add(new TranslatableText("level_tooltips.attack_speed", numberFormat.format(comp.getAttackSpeed())).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
         lines.add(new TranslatableText("level_tooltips.damage", comp.getDamage()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
         lines.add(new TranslatableText("level_tooltips.durability", Converters.getKeyFromQuality(Converters.getQualityFromDurability(comp.getDurability()))).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
         lines.add(new TranslatableText("level_tooltips.stability", Converters.getKeyFromQuality(Converters.getQualityFromStability(comp.getStability()))).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
