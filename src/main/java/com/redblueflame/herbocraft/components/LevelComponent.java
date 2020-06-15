@@ -11,4 +11,7 @@ public interface LevelComponent extends Component {
     int getStability();
     boolean isSterile();
     void setSterile(boolean sterile);
+    void resetLevels();
+    void addLevels(int levels);
+    void setStability(int stability);
 }

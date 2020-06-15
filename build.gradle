@@ -25,12 +25,17 @@ dependencies {
     modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:2.4.0-nightly.1.16-pre4"
     modCompile "com.github.vini2003:spinnery:${project.spinnery_version}"
     include "com.github.vini2003:spinnery:${project.spinnery_version}"
+
+    //modRuntime ("com.github.Chocohead:Data-Breaker-Lower:24be1a2")
+
     /* this will expose the dependency to anyone building against your mod. You might
      want to set this to modImplementation for production */
-    modApi  "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
-    modRuntime ("com.github.Chocohead:Data-Breaker-Lower:24be1a2")
+    //modApi  "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
     /* this will package cotton-resources in your jar. skip if you don't want this */
-    include "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+    //include "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+
+
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 repositories {
     maven {

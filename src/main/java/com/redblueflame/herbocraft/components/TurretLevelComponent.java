@@ -18,10 +18,26 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
 
     public static TurretLevelComponent getRandomStats(short level) {
         TurretLevelComponent comp = new TurretLevelComponent();
-        comp.addRandomStats(level);
+        comp.addLevels(level);
         return comp;
     }
-    public void addRandomStats(short level) {
+
+    @Override
+    public void resetLevels() {
+        health = 5;
+        attackSpeed = 1;
+        damage = 2;
+        durability = 5;
+        stability = 255;
+        sterile = false;
+    }
+
+    @Override
+    public void addLevels(int levels) {
+        addRandomStats(levels);
+    }
+
+    private void addRandomStats(int level) {
         Random rdm = new Random();
         for (int i = 0; i < level; i++) {
             switch (rdm.nextInt(4)) {
@@ -93,6 +109,10 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         this.sterile = sterile;
     }
 
+    @Override
+    public void setStability(int stability) {
+        this.stability = stability;
+    }
 
     @Override
     public void fromTag(CompoundTag tag) {

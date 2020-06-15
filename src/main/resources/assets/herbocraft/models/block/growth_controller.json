@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "herbocraft:block/steriliser_top",
+    "front": "herbocraft:block/growth_controller_front",
+    "bottom": "herbocraft:block/steriliser_bottom",
+    "side": "herbocraft:block/steriliser_side"
+  }
+}

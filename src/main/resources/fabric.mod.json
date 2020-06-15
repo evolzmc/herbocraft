@@ -30,7 +30,6 @@
   "depends": {
     "fabricloader": ">=0.8.7+build.201",
     "fabric": "*",
-    "cotton-resources": ">=1.7.0",
     "minecraft": "1.16-rc.5"
   }
 }

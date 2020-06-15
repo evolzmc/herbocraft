@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:wheat_seeds",
+    "minecraft:cocoa_beans",
+    "minecraft:pumpkin_seeds",
+    "minecraft:melon_seeds",
+    "minecraft:beetroot_seeds"
+  ]
+}
