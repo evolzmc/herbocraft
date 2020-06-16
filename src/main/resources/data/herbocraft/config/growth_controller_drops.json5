@@ -9,7 +9,7 @@
         max: 10
       },
       stability: {
-        min: 100,
+        min: 200,
         max: 255
       }
     }

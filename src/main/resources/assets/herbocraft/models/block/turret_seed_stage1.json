@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "herbocraft:block/turret_seed_stage1"
+  }
+}

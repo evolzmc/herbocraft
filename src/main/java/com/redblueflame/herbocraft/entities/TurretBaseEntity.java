@@ -112,4 +112,9 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     public void takeKnockback(float f, double d, double e) {
         // Do nothing, this shouldn't get any knockback
     }
+
+    @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return false;
+    }
 }

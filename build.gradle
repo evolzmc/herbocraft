@@ -19,10 +19,15 @@ dependencies {
     modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
     testImplementation 'com.google.code.findbugs:jsr305:3.0.2'
     modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modApi "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.1.16-pre4"
+    modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.1.16-pre4"
+    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.1.16-pre4"
     // Adds an implementation dependency on the entity module
-    modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-pre4"
-    modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:2.4.0-nightly.1.16-pre4"
+    modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-pre4"
+    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-pre4"
+    modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:2.4.0-nightly.1.16-pre4"
+    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:2.4.0-nightly.1.16-pre4"
+    modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:2.4.0-nightly.1.16-pre4"
+    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:2.4.0-nightly.1.16-pre4"
     modCompile "com.github.vini2003:spinnery:${project.spinnery_version}"
     include "com.github.vini2003:spinnery:${project.spinnery_version}"
 
@@ -33,8 +38,6 @@ dependencies {
     //modApi  "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
     /* this will package cotton-resources in your jar. skip if you don't want this */
     //include "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
-
-
     implementation 'com.google.code.gson:gson:2.8.6'
 }
 repositories {
@@ -49,6 +52,10 @@ repositories {
     maven {
         name = "Cotton"
         url = "https://server.bbkr.space/artifactory/libs-release/"
+    }
+    maven {
+        name = "BuildCraft"
+        url = "https://mod-buildcraft.com/maven"
     }
     maven { url = "https://jitpack.io" }
 }
