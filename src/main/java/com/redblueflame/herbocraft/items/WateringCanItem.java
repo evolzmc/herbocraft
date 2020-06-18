@@ -28,6 +28,26 @@ public class WateringCanItem extends ToolItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
+        int damage = context.getStack().getDamage();
+        // Check if you are trying to refill it
+        BlockHitResult hitResult = rayTrace(context.getWorld(), context.getPlayer(), RayTraceContext.FluidHandling.SOURCE_ONLY);
+        if (hitResult.getType().equals(HitResult.Type.BLOCK) && !context.getWorld().isClient) {
+            BlockPos blockPos = hitResult.getBlockPos();
+            BlockState blockState = context.getWorld().getBlockState(blockPos);
+            Block block = blockState.getBlock();
+
+            if (block instanceof FluidDrainable) {
+                Fluid fluid = ((FluidDrainable) block).tryDrainFluid(context.getWorld(), blockPos, blockState);
+                context.getWorld().setBlockState(blockPos, blockState);
+
+                if (fluid == Fluids.WATER) {
+                    context.getPlayer().playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
+                    damage -= 2;
+                    if (damage <= 0) damage = 0;
+                    context.getPlayer().getStackInHand(context.getHand()).setDamage(damage);
+                }
+            }
+        }
         if (context.getWorld().isClient()) {
             BlockPos pos = context.getBlockPos();
 
@@ -46,7 +66,7 @@ public class WateringCanItem extends ToolItem {
         int damage = itemStack.getDamage();
         BlockHitResult hitResult = rayTrace(world, user, RayTraceContext.FluidHandling.SOURCE_ONLY);
 
-        if (damage > 0 && hitResult.getType().equals(HitResult.Type.BLOCK)) {
+        if (damage > 0 && hitResult.getType().equals(HitResult.Type.BLOCK) && !world.isClient) {
             BlockPos blockPos = hitResult.getBlockPos();
             BlockState blockState = world.getBlockState(blockPos);
             Block block = blockState.getBlock();
