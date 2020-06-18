@@ -7,7 +7,7 @@ public class EntityTurretComponent extends TurretLevelComponent {
 
     public EntityTurretComponent(LivingEntity owner, short level) {
         this.owner = owner;
-        this.addRandomStats(level);
+        this.addLevels(level);
     }
 
 }

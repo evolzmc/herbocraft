@@ -118,4 +118,5 @@ public class SterilizerBlockEntity extends BlockEntity implements Tickable {
             onFinish(item);
         }
     }
+
 }

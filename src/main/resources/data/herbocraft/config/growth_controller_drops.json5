@@ -1,0 +1,17 @@
+{
+  drops: [
+    {
+      id: "herbocraft:turret_seed",
+      minimalType: "STANDARD",
+      probability: 1,
+      level: {
+        min: 5,
+        max: 10
+      },
+      stability: {
+        min: 200,
+        max: 255
+      }
+    }
+  ]
+}

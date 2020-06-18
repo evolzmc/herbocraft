@@ -19,22 +19,30 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class SterilizerBlock extends BlockWithEntity implements BlockEntityProvider {
-    public SterilizerBlock(Settings settings) {
+public class GrowthController extends BlockWithEntity implements BlockEntityProvider {
+    public GrowthController(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
 
+    @Override
+    public BlockEntity createBlockEntity(BlockView world) {
+        return new GrowthControllerBlockEntity();
+    }
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.STERILIZER_CONTAINER, player, (buffer) -> {
+            ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.GROWTH_CONTROLLER_CONTAINER, player, (buffer) -> {
                 buffer.writeText(new TranslatableText(this.getTranslationKey()));
                 buffer.writeBlockPos(pos);
             });
         }
         return ActionResult.SUCCESS;
+    }
+    @Override
+    public BlockRenderType getRenderType(BlockState blockState) {
+        return BlockRenderType.MODEL;
     }
 
     @Override
@@ -49,7 +57,7 @@ public class SterilizerBlock extends BlockWithEntity implements BlockEntityProvi
     @SuppressWarnings("deprecation")
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
-            SterilizerBlockEntity blockEntity = (SterilizerBlockEntity) world.getBlockEntity(pos);
+            GrowthControllerBlockEntity blockEntity = (GrowthControllerBlockEntity) world.getBlockEntity(pos);
             if (blockEntity != null && blockEntity.inventory != null) {
                 ItemScatterer.spawn(world, pos, blockEntity.inventory);
                 world.updateComparators(pos, this);
@@ -58,12 +66,5 @@ public class SterilizerBlock extends BlockWithEntity implements BlockEntityProvi
         }
     }
 
-    @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new SterilizerBlockEntity();
-    }
-    @Override
-    public BlockRenderType getRenderType(BlockState blockState) {
-        return BlockRenderType.MODEL;
-    }
+
 }
