@@ -46,7 +46,6 @@ public class ReproducerBlockEntity extends BlockEntity implements Tickable {
 
     @Override
     public void tick() {
-        System.out.println("Testing !");
         if (isWorking) {
             currentWork += 1;
             state = (short) (((float) currentWork / (float) targetWork) * 255F);

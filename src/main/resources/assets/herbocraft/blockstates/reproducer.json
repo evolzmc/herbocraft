@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "herbocraft:block/growth_controller",
+      "model": "herbocraft:block/reproducer",
       "y": 90
     },
     "facing=north": {
-      "model": "herbocraft:block/growth_controller"
+      "model": "herbocraft:block/reproducer"
     },
     "facing=south": {
-      "model": "herbocraft:block/growth_controller",
+      "model": "herbocraft:block/reproducer",
       "y": 180
     },
     "facing=west": {
-      "model": "herbocraft:block/growth_controller",
+      "model": "herbocraft:block/reproducer",
       "y": 270
     }
   }

@@ -29,6 +29,8 @@ public class HerboCraftClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(HerboCraft.BULLET, (dispatcher, context) -> new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.TURRET_SEED_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.STERILIZER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.REPRODUCER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.MACHINE_FRAME, RenderLayer.getCutout());
         ClientSidePacketRegistry.INSTANCE.register(HerboCraftPackets.WATERING_PARTICLE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();
 
