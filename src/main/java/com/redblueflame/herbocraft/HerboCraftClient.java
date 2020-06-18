@@ -32,9 +32,9 @@ public class HerboCraftClient implements ClientModInitializer {
                 for (int i = 0; i < HerboCraft.WATERING_CAN_MAX_PARTICLES; i++) {
                     for (int j = 0; j < HerboCraft.WATERING_CAN_MAX_PARTICLES; j++) {
                         MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.SPLASH,
-                                pos.getX() + ((double) i / (double) (HerboCraft.WATERING_CAN_MAX_PARTICLES - 1)),
+                                pos.getX() + .5 + ((double) i / (double) (HerboCraft.WATERING_CAN_MAX_PARTICLES - 1)),
                                 pos.getY(),
-                                pos.getZ() + ((double) j / (double) (HerboCraft.WATERING_CAN_MAX_PARTICLES - 1)),
+                                pos.getZ() + .5 + ((double) j / (double) (HerboCraft.WATERING_CAN_MAX_PARTICLES - 1)),
                                 0.0D,
                                 0.0D,
                                 0.0D);

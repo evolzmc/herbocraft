@@ -34,6 +34,7 @@ public class WateringCanItem extends ToolItem {
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
             passedData.writeBlockPos(pos);
             passedData.writeBoolean(context.getHand().equals(Hand.MAIN_HAND));
+            passedData.writeInt(1); // Range
             ClientSidePacketRegistry.INSTANCE.sendToServer(HerboCraftPackets.WATERING_CAN_USAGE_PACKET, passedData);
         }
 

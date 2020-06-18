@@ -25,11 +25,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class HerboCraft implements ModInitializer {
     public static final String name = "herbocraft";
-    public static final int WATERING_CAN_MAX_PARTICLES = 10;
+    public static final int WATERING_CAN_MAX_PARTICLES = 2;
 
     /**
      * Registers the turret with the ID "herbocraft:turret_base"
@@ -62,30 +64,42 @@ public class HerboCraft implements ModInitializer {
         ServerSidePacketRegistry.INSTANCE.register(HerboCraftPackets.WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();
             Hand hand = packetByteBuf.readBoolean() ? Hand.MAIN_HAND : Hand.OFF_HAND;
+            int range = packetByteBuf.readInt();
+            List<BlockPos> positions = new ArrayList<>();
+
+            for (int x = 0; x < range; x++) for (int z = 0; z < range; z++) if (!contains(positions, pos.getX() + x, pos.getZ() + z)) positions.add(pos.add(x, 0, z));
 
             packetContext.getTaskQueue().execute(() -> {
                 ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
                 World world = player.world;
-                BlockState state = world.getBlockState(pos);
-                Block block = state.getBlock();
-                Stream<PlayerEntity> watchingPlayers = PlayerStream.watching(world, pos);
 
-                if (block instanceof CropBlock) {
-                    CropBlock cropBlock = (CropBlock) block;
+                for (BlockPos blockPos : positions) {
+                    BlockState state = world.getBlockState(blockPos);
+                    Block block = state.getBlock();
+                    Stream<PlayerEntity> watchingPlayers = PlayerStream.watching(world, blockPos);
 
-                    if (!cropBlock.isMature(state)) {
-                        ItemStack inHandStack = hand.equals(Hand.MAIN_HAND) ? player.getMainHandStack() : player.getOffHandStack();
-                        if (inHandStack.getDamage() >= inHandStack.getMaxDamage()) return;
-                        inHandStack.damage(1, world.random, player);
+                    if (block instanceof CropBlock) {
+                        CropBlock cropBlock = (CropBlock) block;
 
-                        PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
-                        passedData.writeBlockPos(pos);
-                        watchingPlayers.forEach(players -> ServerSidePacketRegistry.INSTANCE.sendToPlayer(players, HerboCraftPackets.WATERING_PARTICLE_PACKET, passedData));
+                        if (!cropBlock.isMature(state)) {
+                            ItemStack inHandStack = hand.equals(Hand.MAIN_HAND) ? player.getMainHandStack() : player.getOffHandStack();
+                            if (inHandStack.getDamage() >= inHandStack.getMaxDamage()) return;
+                            inHandStack.damage(1, world.random, player);
 
-                        cropBlock.randomTick(state, (ServerWorld) world, pos, world.random);
+                            PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
+                            passedData.writeBlockPos(blockPos);
+                            watchingPlayers.forEach(players -> ServerSidePacketRegistry.INSTANCE.sendToPlayer(players, HerboCraftPackets.WATERING_PARTICLE_PACKET, passedData));
+
+                            cropBlock.randomTick(state, (ServerWorld) world, blockPos, world.random);
+                        }
                     }
                 }
             });
         });
+    }
+
+    private boolean contains(List<BlockPos> positions, double x, double z) {
+        for (BlockPos pos : positions) if (pos.getX() == x && pos.getZ() == z) return true;
+        return false;
     }
 }
