@@ -7,12 +7,11 @@ import net.minecraft.nbt.CompoundTag;
 
 import java.util.Random;
 
-public class TurretLevelComponent implements LevelComponent, CopyableComponent<LevelComponent>
-{
+public class TurretLevelComponent implements LevelComponent, CopyableComponent<LevelComponent> {
     private int health = 5;
     private float attackSpeed = 1;
     private int damage = 2;
-    private int durability = 5;
+    private int durability = 200;
     private int stability = 255;
     private boolean sterile = false;
 
@@ -40,17 +39,21 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     private void addRandomStats(int level) {
         Random rdm = new Random();
         for (int i = 0; i < level; i++) {
-            switch (rdm.nextInt(4)) {
+            switch (rdm.nextInt(7)) {
                 case 0:
+                case 1:
                     this.addLevelToStat("Health");
                     break;
-                case 1:
+                case 2:
+                case 3:
                     this.addLevelToStat("AttackSpeed");
                     break;
-                case 2:
+                case 4:
+                case 5:
                     this.addLevelToStat("Damage");
                     break;
-                case 3:
+                case 6:
+                    // Made this less probable to prevent infinite replication.
                     this.addLevelToStat("Durability");
                     break;
             }
@@ -69,9 +72,22 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
                 damage += 1;
                 break;
             case "Durability":
-                durability+=15;
+                durability += 1;
                 break;
         }
+    }
+
+    @Override
+    public void reproduceWith(LevelComponent other, LevelComponent target, Random rdm) {
+        int sep = Math.abs(this.health - other.getHealth());
+        target.setHealth(Math.min(this.health, other.getHealth()) + rdm.nextInt(sep+1));
+        float sep_attack_speed = Math.abs(this.attackSpeed - other.getAttackSpeed());
+        target.setAttackSpeed(Math.min(this.attackSpeed, other.getAttackSpeed()) + rdm.nextFloat()*(sep_attack_speed));
+        sep = Math.abs(this.damage - other.getDamage());
+        target.setDamage(Math.min(this.damage, other.getDamage()) + rdm.nextInt(sep+1));
+        sep = Math.abs(this.durability - other.getDurability());
+        target.setDurability(Math.min(this.durability, other.getDurability()) + rdm.nextInt((sep/4)+1));
+        target.setStability(200 + rdm.nextInt(55));
     }
 
     @Override
@@ -80,8 +96,18 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     }
 
     @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    @Override
     public float getAttackSpeed() {
         return attackSpeed;
+    }
+
+    @Override
+    public void setAttackSpeed(float attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 
     @Override
@@ -90,8 +116,18 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     }
 
     @Override
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    @Override
     public int getDurability() {
         return durability;
+    }
+
+    @Override
+    public void setDurability(int durability) {
+        this.durability = durability;
     }
 
     @Override

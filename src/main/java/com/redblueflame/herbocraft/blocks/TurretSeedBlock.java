@@ -53,7 +53,7 @@ public class TurretSeedBlock extends CropBlock implements BlockEntityProvider {
         }
         LevelComponent entityComp = opt_comp.get();
         entityComp.copyFrom(itemComp);
-
+        entity.setAttributes(entityComp);
         return entity;
     }
 
