@@ -61,8 +61,12 @@ jobs:
         id: rename-file
         run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
       - name: Upload
-        run: ./gradlew curseforge
+        uses: eskatos/gradle-command-action@v1
+        with:
+          gradle-version: 6.4.1
+          arguments: build
         env:
           CURSEFORGE_API_KEY: ${{ secrets.PUBLISH_KEY }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
           CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+
