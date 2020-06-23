@@ -60,14 +60,9 @@ jobs:
       - name: Rename File
         id: rename-file
         run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
-      - name: Publish to curseforge
-        uses: itsmeow/curseforge-upload@v2
-        with:
-         token: ${{ secrets.PUBLISH_KEY }}
-         project_id: 390001
-         game_endpoint: minecraft
-         file_path: build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
-         changelog: ${{ steps.changelog.outputs.changelog }}
-         changelog_type: text
-         game_versions: 562
-         release_type: alpha
+      - name: Upload
+          run: ./gradlew curseforge
+          env:
+            CURSEFORGE_API_KEY: ${{ secrets.PUBLISH_KEY }}
+            VERSION: ${{ steps.get_version.outputs.VERSION }}
+            CHANGELOG: ${{ steps.changelog.outputs.changelog }}

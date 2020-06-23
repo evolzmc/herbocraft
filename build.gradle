@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '0.4-SNAPSHOT'
     id 'maven-publish'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -11,6 +12,12 @@ version = project.mod_version
 group = project.maven_group
 
 minecraft {
+}
+
+if (System.getenv('VERSION') != null) {
+    version = System.getenv('VERSION')
+} else {
+    version = 'dev'
 }
 
 dependencies {
@@ -95,23 +102,39 @@ jar {
     from "LICENSE"
 }
 
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+curseforge {
+    def envApiKey = System.getenv('CURSEFORGE_API_KEY')
+    def envChangeLog = System.getenv('CHANGELOG')
+    if (envApiKey == null) {
+        println 'Unable to locate api key in env variable'
+        return
+    }
+    def versionReleaseType = "release"
+    if (version.toString().toLowerCase().contains("beta")) {
+        versionReleaseType = "beta"
+    } else if (version.toString().toLowerCase().contains("alpha")) {
+        versionReleaseType = "alpha"
+    }
+    project {
+        apiKey = envApiKey
+        id = '390001'
+        changelog = envChangeLog
+        changelogType = "markdown"
+        releaseType = versionReleaseType
+        addGameVersion "1.16"
+        addGameVersion "Java 8"
+
+
+        relations {
+            requiredDependency 'fabric'
+        }
+        afterEvaluate {
+            mainArtifact(remapJar.output)
+            uploadTask.dependsOn(remapJar)
         }
     }
-
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
+    options {
+        forgeGradleIntegration = false
     }
+
 }
