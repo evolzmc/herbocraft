@@ -57,9 +57,6 @@ jobs:
           asset_path: build/libs/herbocraft.jar
           asset_name: herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
           asset_content_type: application/java-archive
-      - name: Rename File
-        id: rename-file
-        run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
       - name: Upload
         uses: eskatos/gradle-command-action@v1
         with:
