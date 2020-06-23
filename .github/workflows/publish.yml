@@ -28,13 +28,9 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
-      - name: Extract tag name
-        id: tag
-        uses: actions/github-script@0.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            return context.payload.ref.replace(/\/refs\/tags\//, '');
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
       - name: Generate changelog
         id: changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.1.1
@@ -46,8 +42,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ steps.tag.outputs.result }}
-          release_name: Release ${{ steps.tag.outputs.result }}
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
@@ -59,18 +55,18 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: build/libs/herbocraft.jar
-          asset_name: jerbocraft-${{ steps.tag.outputs.result }}.jar
+          asset_name: herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
           asset_content_type: application/java-archive
       - name: Rename File
         id: rename-file
-        run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ steps.tag.outputs.result }}.jar
+        run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
       - name: Publish to curseforge
         uses: itsmeow/curseforge-upload@v2
         with:
          token: ${{ secrets.GITHUB_TOKEN }}
          project_id: 390001
          game_endpoint: minecraft
-         file_path: build/libs/herbocraft-*.jar
+         file_path: build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
          changelog: ${{ steps.changelog.outputs.changelog }}
          changelog_type: text
          game_versions: 1.16
