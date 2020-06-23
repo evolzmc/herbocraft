@@ -3,6 +3,7 @@ package com.redblueflame.herbocraft.ui;
 import com.redblueflame.herbocraft.HerboCraft;
 import com.redblueflame.herbocraft.blocks.GrowthControllerContainer;
 import com.redblueflame.herbocraft.blocks.SterilizerBlockContainer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -41,9 +42,11 @@ public class GrowthControllerInterface extends BaseContainerScreen<GrowthControl
         img.setState(container.entity.state);
         mainPanel.add(base);
     }
+
     @Override
-    public void tick() {
-        super.tick();
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
         img.setState(getContainer().entity.state);
+        super.render(matrices, mouseX, mouseY, tickDelta);
     }
+
 }
