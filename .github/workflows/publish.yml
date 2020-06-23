@@ -63,7 +63,7 @@ jobs:
       - name: Publish to curseforge
         uses: itsmeow/curseforge-upload@v2
         with:
-         token: ${{ secrets.GITHUB_TOKEN }}
+         token: ${{ secrets.PUBLISH_KEY }}
          project_id: 390001
          game_endpoint: minecraft
          file_path: build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
