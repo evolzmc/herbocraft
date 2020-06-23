@@ -61,8 +61,8 @@ jobs:
         id: rename-file
         run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
       - name: Upload
-          run: ./gradlew curseforge
-          env:
-            CURSEFORGE_API_KEY: ${{ secrets.PUBLISH_KEY }}
-            VERSION: ${{ steps.get_version.outputs.VERSION }}
-            CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+        run: ./gradlew curseforge
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.PUBLISH_KEY }}
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
