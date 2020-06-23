@@ -1,5 +1,9 @@
 name: publish
-on: [push, pull_request]
+on:
+  release:
+    type: ['published']
+    branches:
+    - master
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -24,3 +28,12 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - run: 'echo "data: ${{ github }}"'
+      #
+      #- uses: itsmeow/curseforge-upload@v2
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    project_id: 390001
+      #    game_endpoint: minecraft
+      #    file_path: build/libs/herbocraft-*.jar
+      #    changelog: ${{
