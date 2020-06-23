@@ -6,6 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,10 +24,12 @@ import static com.redblueflame.herbocraft.HerboCraft.BULLET;
 
 public class BulletEntity extends ThrownItemEntity {
     private float damage;
+    private BulletEffect bulletEffect;
 
     public BulletEntity(EntityType<? extends BulletEntity> entityType, World world) {
         super(entityType, world);
         this.damage = 2f;
+        this.bulletEffect = null;
     }
 
     private BulletEntity(EntityType<? extends BulletEntity> entityType, World world, LivingEntity owner, float damage) {
@@ -33,12 +37,28 @@ public class BulletEntity extends ThrownItemEntity {
         this.damage = damage;
     }
 
-    public static BulletEntity getWithOwner(World world, LivingEntity owner, float damage) {
-        return new BulletEntity(BULLET, world, owner, damage);
+    private BulletEntity(EntityType<? extends BulletEntity> entityType, World world, LivingEntity owner, BulletEffect bulletEffect) {
+        super(entityType, owner, world);
+        this.damage = 2f;
+        this.bulletEffect = bulletEffect;
+    }
+
+    private BulletEntity(EntityType<? extends BulletEntity> entityType, World world, LivingEntity owner, float damage, BulletEffect bulletEffect) {
+        super(entityType, owner, world);
+        this.damage = damage;
+        this.bulletEffect = bulletEffect;
+    }
+
+    public static BulletEntity getWithOwner(World world, LivingEntity owner, float damage, BulletEffect bulletEffect) {
+        return new BulletEntity(BULLET, world, owner, damage, bulletEffect);
     }
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public void setBulletEffect(BulletEffect bulletEffect) {
+        this.bulletEffect = bulletEffect;
     }
 
     @Environment(EnvType.CLIENT)
@@ -62,6 +82,7 @@ public class BulletEntity extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), damage);
+        if (entity instanceof LivingEntity && this.bulletEffect != null) ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(this.bulletEffect.getEffect(), this.bulletEffect.getDuration(), this.bulletEffect.getAmplifier()));
     }
 
     protected void onCollision(HitResult hitResult) {

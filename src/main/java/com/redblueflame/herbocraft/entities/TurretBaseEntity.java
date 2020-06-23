@@ -21,6 +21,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.mob.Monster;
@@ -35,6 +36,7 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     private static final TrackedData<Byte> TURRET_BASE_FLAGS;
     private Goal projectileGoal;
     private float damage = 40F;
+    private BulletEffect bulletEffect = new BulletEffect(StatusEffects.SLOWNESS, 5, 1);
 
     static {
         TURRET_BASE_FLAGS = DataTracker.registerData(TurretBaseEntity.class, TrackedDataHandlerRegistry.BYTE);
@@ -83,7 +85,7 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     }
     @Override
     public void attack(LivingEntity target, float pullProgress) {
-        BulletEntity bulletEntity = BulletEntity.getWithOwner(this.world, this, damage);
+        BulletEntity bulletEntity = BulletEntity.getWithOwner(this.world, this, this.damage, this.bulletEffect);
         double d = target.getEyeY() - 1.100000023841858D;
         double e = target.getX() - this.getX();
         double f = d - bulletEntity.getY();
