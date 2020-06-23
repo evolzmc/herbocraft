@@ -37,6 +37,8 @@ dependencies {
     include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-block:2.4.0-nightly.1.16-pre4"
     modCompile "com.github.vini2003:spinnery:${project.spinnery_version}"
     include "com.github.vini2003:spinnery:${project.spinnery_version}"
+    modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
+    include "io.github.prospector:modmenu:${project.modmenu_version}"
 
     //modRuntime ("com.github.Chocohead:Data-Breaker-Lower:24be1a2")
 
@@ -63,6 +65,10 @@ repositories {
     maven {
         name = "BuildCraft"
         url = "https://mod-buildcraft.com/maven"
+    }
+    maven {
+        name = "Fabric"
+        url = "https://maven.fabricmc.net/"
     }
     maven { url = "https://jitpack.io" }
 }
@@ -115,6 +121,7 @@ curseforge {
     } else if (version.toString().toLowerCase().contains("alpha")) {
         versionReleaseType = "alpha"
     }
+    println "Publishing project..."
     project {
         apiKey = envApiKey
         id = '390001'

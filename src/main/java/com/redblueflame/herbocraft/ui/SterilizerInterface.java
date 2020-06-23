@@ -42,8 +42,8 @@ public class SterilizerInterface extends BaseContainerScreen<SterilizerBlockCont
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
         img.setState(getContainer().entity.progression);
+        super.render(matrices, mouseX, mouseY, tickDelta);
     }
 }

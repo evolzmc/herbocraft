@@ -4,6 +4,7 @@ import com.redblueflame.herbocraft.HerboCraft;
 import com.redblueflame.herbocraft.blocks.GrowthControllerContainer;
 import com.redblueflame.herbocraft.blocks.ReproducerBlockContainer;
 import com.redblueflame.herbocraft.blocks.SterilizerBlockContainer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import spinnery.client.screen.BaseContainerScreen;
 import spinnery.widget.*;
@@ -38,9 +39,11 @@ public class ReproducerBlockInterface extends BaseContainerScreen<ReproducerBloc
         img.setState(container.entity.state);
         mainPanel.add(base);
     }
+
     @Override
-    public void tick() {
-        super.tick();
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
         img.setState(getContainer().entity.state);
+        super.render(matrices, mouseX, mouseY, tickDelta);
     }
+
 }
