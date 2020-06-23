@@ -28,12 +28,43 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
-      - run: 'echo "data: ${{ github }}"'
-      #
-      #- uses: itsmeow/curseforge-upload@v2
-      #  with:
-      #    token: ${{ secrets.GITHUB_TOKEN }}
-      #    project_id: 390001
-      #    game_endpoint: minecraft
-      #    file_path: build/libs/herbocraft-*.jar
-      #    changelog: ${{
+      - name: Generate changelog
+        id: changelog
+        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: build/libs/herbocraft.jar
+          asset_name: jerbocraft-${{ github.ref }}.jar
+          asset_content_type: application/java-archive
+      - name: Rename File
+        id: rename-file
+        run: mv build/libs/herbocraft.jar build/libs/herbocraft-${{ github.ref }}.jar
+      - name: Publish to curseforge
+        uses: itsmeow/curseforge-upload@v2
+        with:
+         token: ${{ secrets.GITHUB_TOKEN }}
+         project_id: 390001
+         game_endpoint: minecraft
+         file_path: build/libs/herbocraft-*.jar
+         changelog: ${{ steps.changelog.outputs.changelog }}
+         changelog_type: text
+         game_versions: 1.16
+         release_type: alpha
