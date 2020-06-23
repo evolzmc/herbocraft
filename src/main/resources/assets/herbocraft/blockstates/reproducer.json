@@ -1,18 +1,78 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "herbocraft:block/reproducer",
+    "facing=east,upgrade=0": {
+      "model": "herbocraft:block/reproducer_tier0",
       "y": 90
     },
-    "facing=north": {
-      "model": "herbocraft:block/reproducer"
+    "facing=north,upgrade=0": {
+      "model": "herbocraft:block/reproducer_tier0"
     },
-    "facing=south": {
-      "model": "herbocraft:block/reproducer",
+    "facing=south,upgrade=0": {
+      "model": "herbocraft:block/reproducer_tier0",
       "y": 180
     },
-    "facing=west": {
-      "model": "herbocraft:block/reproducer",
+    "facing=west,upgrade=0": {
+      "model": "herbocraft:block/reproducer_tier0",
+      "y": 270
+    },
+    "facing=east,upgrade=1": {
+      "model": "herbocraft:block/reproducer_tier1",
+      "y": 90
+    },
+    "facing=north,upgrade=1": {
+      "model": "herbocraft:block/reproducer_tier1"
+    },
+    "facing=south,upgrade=1": {
+      "model": "herbocraft:block/reproducer_tier1",
+      "y": 180
+    },
+    "facing=west,upgrade=1": {
+      "model": "herbocraft:block/reproducer_tier1",
+      "y": 270
+    },
+    "facing=east,upgrade=2": {
+      "model": "herbocraft:block/reproducer_tier2",
+      "y": 90
+    },
+    "facing=north,upgrade=2": {
+      "model": "herbocraft:block/reproducer_tier2"
+    },
+    "facing=south,upgrade=2": {
+      "model": "herbocraft:block/reproducer_tier2",
+      "y": 180
+    },
+    "facing=west,upgrade=2": {
+      "model": "herbocraft:block/reproducer_tier2",
+      "y": 270
+    },
+    "facing=east,upgrade=3": {
+      "model": "herbocraft:block/reproducer_tier3",
+      "y": 90
+    },
+    "facing=north,upgrade=3": {
+      "model": "herbocraft:block/reproducer_tier3"
+    },
+    "facing=south,upgrade=3": {
+      "model": "herbocraft:block/reproducer_tier3",
+      "y": 180
+    },
+    "facing=west,upgrade=3": {
+      "model": "herbocraft:block/reproducer_tier3",
+      "y": 270
+    },
+    "facing=east,upgrade=4": {
+      "model": "herbocraft:block/reproducer_tier4",
+      "y": 90
+    },
+    "facing=north,upgrade=4": {
+      "model": "herbocraft:block/reproducer_tier4"
+    },
+    "facing=south,upgrade=4": {
+      "model": "herbocraft:block/reproducer_tier4",
+      "y": 180
+    },
+    "facing=west,upgrade=4": {
+      "model": "herbocraft:block/reproducer_tier4",
       "y": 270
     }
   }

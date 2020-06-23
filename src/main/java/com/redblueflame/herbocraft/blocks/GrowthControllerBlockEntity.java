@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import spinnery.common.inventory.BaseInventory;
 import spinnery.common.utility.InventoryUtilities;
 
@@ -24,6 +26,7 @@ public class GrowthControllerBlockEntity extends BlockEntity implements Tickable
     public int currentWork;
     public Item currentItem;
     public BaseInventory inventory;
+
     public GrowthControllerBlockEntity() {
         super(HerboCraft.GROWTH_CONTROLLER_BLOCK_ENTITY);
     }
@@ -33,12 +36,12 @@ public class GrowthControllerBlockEntity extends BlockEntity implements Tickable
      * @return A modifier, where 1 is the lower.
      */
     private float getQualityMultiplier() {
-        return 1F;
+        return QualityType.fromInt(world.getBlockState(pos).get(AbstractUpgradableBlock.UPGRADE_LEVEL)).getMultiplier();
     }
 
     private QualityType getQualityType() {
         // TODO: Remove the hardcoded hell that is this code
-        return QualityType.STANDARD;
+        return QualityType.fromInt(world.getBlockState(pos).get(AbstractUpgradableBlock.UPGRADE_LEVEL));
     }
 
     @Override
@@ -100,6 +103,7 @@ public class GrowthControllerBlockEntity extends BlockEntity implements Tickable
         // Save the current value of the number to the tag
         tag.putInt("currentWork", currentWork);
         tag.putInt("targetWork", targetWork);
+        tag.putBoolean("isWorking", isWorking);
         InventoryUtilities.write(inventory, tag);
         return tag;
     }
@@ -109,6 +113,7 @@ public class GrowthControllerBlockEntity extends BlockEntity implements Tickable
         super.fromTag(state, tag);
         currentWork = tag.getInt("currentWork");
         targetWork = tag.getInt("targetWork");
+        isWorking = tag.getBoolean("isWorking");
         inventory = InventoryUtilities.read(tag);
     }
 

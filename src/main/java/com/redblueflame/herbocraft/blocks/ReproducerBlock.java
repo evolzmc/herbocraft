@@ -18,7 +18,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class ReproducerBlock extends BlockWithEntity implements BlockEntityProvider{
+public class ReproducerBlock extends AbstractUpgradableBlock implements BlockEntityProvider{
     public ReproducerBlock(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
@@ -47,6 +47,7 @@ public class ReproducerBlock extends BlockWithEntity implements BlockEntityProvi
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+        super.appendProperties(stateManager);
         stateManager.add(Properties.HORIZONTAL_FACING);
     }
 

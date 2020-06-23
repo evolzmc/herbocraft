@@ -1,6 +1,8 @@
 package com.redblueflame.herbocraft.blocks;
 
 import com.redblueflame.herbocraft.HerboCraft;
+import com.redblueflame.herbocraft.QualityType;
+import com.redblueflame.herbocraft.utils.UpgradeSpawner;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,7 +21,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class GrowthController extends BlockWithEntity implements BlockEntityProvider {
+public class GrowthController extends AbstractUpgradableBlock implements BlockEntityProvider {
     public GrowthController(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
@@ -47,6 +49,7 @@ public class GrowthController extends BlockWithEntity implements BlockEntityProv
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+        super.appendProperties(stateManager);
         stateManager.add(Properties.HORIZONTAL_FACING);
     }
 
@@ -62,6 +65,7 @@ public class GrowthController extends BlockWithEntity implements BlockEntityProv
                 ItemScatterer.spawn(world, pos, blockEntity.inventory);
                 world.updateComparators(pos, this);
             }
+            ItemScatterer.spawn(world, pos, UpgradeSpawner.getItems(QualityType.fromInt(state.get(AbstractUpgradableBlock.UPGRADE_LEVEL))));
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }

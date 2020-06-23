@@ -9,6 +9,7 @@ import com.redblueflame.herbocraft.entities.BulletEntity;
 import com.redblueflame.herbocraft.entities.TurretBaseEntity;
 import com.redblueflame.herbocraft.items.TurretAnalyzer;
 import com.redblueflame.herbocraft.items.TurretSeed;
+import com.redblueflame.herbocraft.items.UpgradeItem;
 import com.redblueflame.herbocraft.items.WateringCanItem;
 import com.redblueflame.herbocraft.utils.TurretLooter;
 import io.netty.buffer.Unpooled;
@@ -66,6 +67,7 @@ public class HerboCraft implements ModInitializer {
 
     public static Tag<Item> SEEDS;
     public static Tag<Item> BASE_SEEDS;
+    public static Tag<Block> UPGRADABLE_BLOCKS;
     /**
      * Registers the turret with the ID "herbocraft:turret_base"
      * <p>
@@ -89,6 +91,10 @@ public class HerboCraft implements ModInitializer {
     public static final Item WATERING_CAN = new WateringCanItem(new Item.Settings().group(HERBO_GROUP).maxCount(1).maxDamage(10));
     public static Item TURRET_SEED;
     public static final Item TURRET_ANALYSER = new TurretAnalyzer(new Item.Settings().group(HERBO_GROUP).maxCount(1));
+    public static final Item TIER1_UPGRADE = new UpgradeItem(new Item.Settings().group(HERBO_GROUP), QualityType.TIER1);
+    public static final Item TIER2_UPGRADE = new UpgradeItem(new Item.Settings().group(HERBO_GROUP), QualityType.TIER2);
+    public static final Item TIER3_UPGRADE = new UpgradeItem(new Item.Settings().group(HERBO_GROUP), QualityType.TIER3);
+    public static final Item TIER4_UPGRADE = new UpgradeItem(new Item.Settings().group(HERBO_GROUP), QualityType.TIER4);
 
     public static final Block STERILIZER = new SterilizerBlock(FabricBlockSettings.of(Material.METAL));
     public static final Block GROWTH_CONTROLLER = new GrowthController(FabricBlockSettings.of(Material.METAL));
@@ -107,6 +113,7 @@ public class HerboCraft implements ModInitializer {
     public static BlockEntityType<GrowthControllerBlockEntity> GROWTH_CONTROLLER_BLOCK_ENTITY;
     public static BlockEntityType<TurretSeedBlockEntity> TURRET_SEED_BLOCK_ENTITY;
     public static BlockEntityType<ReproducerBlockEntity> REPRODUCER_BLOCK_ENTITY;
+    public static BlockEntityType<UpgraderBlockEntity> UPGRADER_BLOCK_ENTITY;
     //endregion
 
     //region Containers
@@ -122,8 +129,15 @@ public class HerboCraft implements ModInitializer {
         FabricDefaultAttributeRegistry.register(TURRET_BASE, TurretBaseEntity.createBaseTurretAttributes());
         Registry.register(Registry.ITEM, new Identifier(name, "watering_can"), WATERING_CAN);
         Registry.register(Registry.ITEM, new Identifier(name, "turret_analyser"), TURRET_ANALYSER);
+        Registry.register(Registry.ITEM, new Identifier(name, "tier1_upgrade"), TIER1_UPGRADE);
+        Registry.register(Registry.ITEM, new Identifier(name, "tier2_upgrade"), TIER2_UPGRADE);
+        Registry.register(Registry.ITEM, new Identifier(name, "tier3_upgrade"), TIER3_UPGRADE);
+        Registry.register(Registry.ITEM, new Identifier(name, "tier4_upgrade"), TIER4_UPGRADE);
+
+        // Get tags from registry
         SEEDS = TagRegistry.item(new Identifier(name, "seed"));
         BASE_SEEDS = TagRegistry.item(new Identifier(name, "base_seed"));
+        UPGRADABLE_BLOCKS = TagRegistry.block(new Identifier(name, "upgradable_blocks"));
 
         // Register blocks
         Registry.register(Registry.BLOCK, new Identifier(name, "sterilizer"), STERILIZER);
