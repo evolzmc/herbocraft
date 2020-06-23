@@ -129,7 +129,7 @@ curseforge {
             requiredDependency 'fabric'
         }
         afterEvaluate {
-            mainArtifact(remapJar.output)
+            mainArtifact(remapJar)
             uploadTask.dependsOn(remapJar)
         }
     }
