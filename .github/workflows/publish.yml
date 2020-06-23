@@ -69,5 +69,5 @@ jobs:
          file_path: build/libs/herbocraft-${{ steps.get_version.outputs.VERSION }}.jar
          changelog: ${{ steps.changelog.outputs.changelog }}
          changelog_type: text
-         game_versions: 1.16
+         game_versions: 562
          release_type: alpha
