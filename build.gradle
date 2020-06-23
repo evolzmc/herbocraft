@@ -59,7 +59,9 @@ repositories {
     }
     maven { url = "https://jitpack.io" }
 }
-
+configurations {
+    jar.archiveName = 'herbocraft.jar'
+}
 processResources {
     inputs.property "version", project.version
 
