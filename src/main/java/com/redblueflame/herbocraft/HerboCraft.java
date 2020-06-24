@@ -101,6 +101,7 @@ public class HerboCraft implements ModInitializer {
     public static final Block TURRET_SEED_BLOCK = new TurretSeedBlock(FabricBlockSettings.of(Material.PLANT));
     public static final Block REPRODUCER = new ReproducerBlock(FabricBlockSettings.of(Material.METAL).nonOpaque());
     public static final Block MACHINE_FRAME = new GlassBlock(FabricBlockSettings.of(Material.METAL).nonOpaque());
+    public static final Block UPGRADER = new UpgraderBlock(FabricBlockSettings.of(Material.METAL));
     //endregion
 
     //region Components
@@ -120,6 +121,7 @@ public class HerboCraft implements ModInitializer {
     public static final Identifier STERILIZER_CONTAINER = new Identifier(name, "sterilizer_interface");
     public static final Identifier GROWTH_CONTROLLER_CONTAINER = new Identifier(name, "growth_controller_interface");
     public static final Identifier REPRODUCER_CONTAINER = new Identifier(name, "reproducer_interface");
+    public static final Identifier UPGRADER_CONTAINER = new Identifier(name, "upgrader_interface");
     //endregion
     @Override
     public void onInitialize() {
@@ -156,11 +158,16 @@ public class HerboCraft implements ModInitializer {
         Registry.register(Registry.BLOCK, new Identifier(name, "machine_frame"), MACHINE_FRAME);
         Registry.register(Registry.ITEM, new Identifier(name, "machine_frame"), new BlockItem(MACHINE_FRAME, new Item.Settings().group(HERBO_GROUP)));
 
+        Registry.register(Registry.BLOCK, new Identifier(name, "upgrader"), UPGRADER);
+        Registry.register(Registry.ITEM, new Identifier(name, "upgrader"), new BlockItem(UPGRADER, new Item.Settings().group(HERBO_GROUP)));
+
+
         // Register blockentities
         STERILIZER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(name, "sterilizer"), BlockEntityType.Builder.create(SterilizerBlockEntity::new, STERILIZER).build(null));
         GROWTH_CONTROLLER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(name, "growth_controller"), BlockEntityType.Builder.create(GrowthControllerBlockEntity::new, GROWTH_CONTROLLER).build(null));
         TURRET_SEED_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(name, "turret_seed"), BlockEntityType.Builder.create(TurretSeedBlockEntity::new, TURRET_SEED_BLOCK).build(null));
         REPRODUCER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(name, "reproducer"), BlockEntityType.Builder.create(ReproducerBlockEntity::new, REPRODUCER).build(null));
+        UPGRADER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(name, "upgrader"), BlockEntityType.Builder.create(UpgraderBlockEntity::new, UPGRADER).build(null));
 
         // Register containers
         ContainerProviderRegistry.INSTANCE.registerFactory(STERILIZER_CONTAINER,
@@ -169,6 +176,8 @@ public class HerboCraft implements ModInitializer {
                 (syncId, id, player, buf) -> new GrowthControllerContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
         ContainerProviderRegistry.INSTANCE.registerFactory(REPRODUCER_CONTAINER,
                 (syncId, id, player, buf) -> new ReproducerBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
+        ContainerProviderRegistry.INSTANCE.registerFactory(UPGRADER_CONTAINER,
+                (syncId, id, player, buf) -> new UpgraderBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
         // region Packets
         ServerSidePacketRegistry.INSTANCE.register(HerboCraftPackets.WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();

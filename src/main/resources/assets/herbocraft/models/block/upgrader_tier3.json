@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "herbocraft:block/steriliser_top",
+    "front": "herbocraft:block/upgrader_front_tier3",
+    "bottom": "herbocraft:block/steriliser_bottom",
+    "side": "herbocraft:block/steriliser_side"
+  }
+}

@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "herbocraft:growth_controller",
-    "herbocraft:reproducer"
+    "herbocraft:reproducer",
+    "herbocraft:upgrader"
   ]
 }

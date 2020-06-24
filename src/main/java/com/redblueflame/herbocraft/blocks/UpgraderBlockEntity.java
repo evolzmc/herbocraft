@@ -3,11 +3,14 @@ package com.redblueflame.herbocraft.blocks;
 import com.redblueflame.herbocraft.HerboCraft;
 import com.redblueflame.herbocraft.QualityType;
 import com.redblueflame.herbocraft.components.LevelComponent;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import spinnery.common.inventory.BaseInventory;
+import spinnery.common.utility.InventoryUtilities;
 
 import java.util.Optional;
 
@@ -37,6 +40,9 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
                 workFinished();
             }
         }
+        if (inventory == null) {
+            return;
+        }
         // Check if work is available
         checkWork();
     }
@@ -49,7 +55,14 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
     private void checkWork() {
         if (inventory.getStack(10).isEmpty()) {
             resetWork();
-            return;
+            // Check of the input slots
+            int input = getFirstInputSlot();
+            if (input == -1) {
+                return;
+            }
+            // Put the item in the slot 10
+            inventory.setStack(10, inventory.getStack(input));
+            inventory.removeStack(input);
         }
         ItemStack itemStack = inventory.getStack(10);
         // Check if the item has the necessary properties
@@ -63,6 +76,10 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
         if (availableSlot == -1) {
             // The output is full, we stop.
             resetWork();
+            return;
+        }
+        // Check if the plant has not reached the limit of upgrades or is sterile
+        if (comp.get().isSterile() || comp.get().getStability() <= 25) {
             return;
         }
         if (isWorking) {
@@ -82,6 +99,7 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
         targetWorkProgress = calculateWork();
         currentWorkProgress = 0;
         state = 0;
+        isWorking = true;
     }
     private int calculateWork() {
         return (int) (600*getQualityMultiplier());
@@ -98,9 +116,35 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
                 checkWork();
             }
         }
+
     }
     private void workFinished() {
-
+        if (inventory.getStack(10).isEmpty()) {
+            resetWork();
+            return;
+        }
+        ItemStack itemStack = inventory.getStack(10);
+        // Check if the item has the necessary properties
+        Optional<LevelComponent> comp = HerboCraft.LEVELLING.maybeGet(itemStack);
+        if (!comp.isPresent()) {
+            // The component is not present, we do nothing.
+            resetWork();
+            return;
+        }
+        comp.get().addLevels(1);
+        comp.get().setStability(comp.get().getStability()-25);
+        // Great !
+        if (comp.get().getStability() <= 25) {
+            // Move the item to an output spot
+            int target = getFirstAvailableSlot();
+            if (target == -1) {
+                resetWork();
+            }
+            inventory.setStack(target, inventory.getStack(10));
+            inventory.removeStack(10);
+        }
+        resetWork();
+        checkWork();
     }
 
     private float getQualityMultiplier() {
@@ -124,4 +168,24 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
         return -1;
     }
     // endregion
+    @Override
+    public CompoundTag toTag(CompoundTag tag) {
+        super.toTag(tag);
+
+        // Save the current value of the number to the tag
+        tag.putInt("currentWork", currentWorkProgress);
+        tag.putInt("targetWork", targetWorkProgress);
+        tag.putBoolean("isWorking", isWorking);
+        InventoryUtilities.write(inventory, tag);
+        return tag;
+    }
+
+    @Override
+    public void fromTag(BlockState state, CompoundTag tag) {
+        super.fromTag(state, tag);
+        currentWorkProgress = tag.getInt("currentWork");
+        targetWorkProgress = tag.getInt("targetWork");
+        isWorking = tag.getBoolean("isWorking");
+        inventory = InventoryUtilities.read(tag);
+    }
 }

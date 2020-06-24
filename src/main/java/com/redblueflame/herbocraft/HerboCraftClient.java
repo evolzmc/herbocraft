@@ -4,6 +4,7 @@ import com.redblueflame.herbocraft.entities.renderer.TurretBaseRenderer;
 import com.redblueflame.herbocraft.ui.GrowthControllerInterface;
 import com.redblueflame.herbocraft.ui.ReproducerBlockInterface;
 import com.redblueflame.herbocraft.ui.SterilizerInterface;
+import com.redblueflame.herbocraft.ui.UpgraderBlockInterface;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,6 +26,7 @@ public class HerboCraftClient implements ClientModInitializer {
         ScreenProviderRegistry.INSTANCE.registerFactory(HerboCraft.STERILIZER_CONTAINER, SterilizerInterface::new);
         ScreenProviderRegistry.INSTANCE.registerFactory(HerboCraft.GROWTH_CONTROLLER_CONTAINER, GrowthControllerInterface::new);
         ScreenProviderRegistry.INSTANCE.registerFactory(HerboCraft.REPRODUCER_CONTAINER, ReproducerBlockInterface::new);
+        ScreenProviderRegistry.INSTANCE.registerFactory(HerboCraft.UPGRADER_CONTAINER, UpgraderBlockInterface::new);
         EntityRendererRegistry.INSTANCE.register(HerboCraft.TURRET_BASE, (dispatcher, context) -> new TurretBaseRenderer(dispatcher));
         EntityRendererRegistry.INSTANCE.register(HerboCraft.BULLET, (dispatcher, context) -> new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.TURRET_SEED_BLOCK, RenderLayer.getCutout());

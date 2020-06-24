@@ -14,17 +14,17 @@ import spinnery.widget.WSlot;
 
 import java.util.Collection;
 
-public class UpgraderContainer extends BaseContainer {
-    public GrowthControllerBlockEntity entity;
+public class UpgraderBlockContainer extends BaseContainer {
+    public UpgraderBlockEntity entity;
     public static final int GROWTH_CONTROLLER_INVENTORY = 1;
     public Text name;
     public PlayerEntity player;
 
-    public UpgraderContainer(int synchronizationID, Text name, PlayerInventory playerInventory, BlockPos pos, World world) {
+    public UpgraderBlockContainer(int synchronizationID, Text name, PlayerInventory playerInventory, BlockPos pos, World world) {
         super(synchronizationID, playerInventory);
         this.name = name;
         this.player = playerInventory.player;
-        this.entity = (GrowthControllerBlockEntity) world.getBlockEntity(pos);
+        this.entity = (UpgraderBlockEntity) world.getBlockEntity(pos);
         initInventory();
     }
 
@@ -39,22 +39,21 @@ public class UpgraderContainer extends BaseContainer {
         Collection<WSlot> input = WSlot.addHeadlessArray(mainInterface, 0, GROWTH_CONTROLLER_INVENTORY, 3, 3);
         for (WSlot item: input) {
             //noinspection unchecked
-            item.accept(HerboCraft.BASE_SEEDS);
+            item.accept(HerboCraft.SEEDS);
+
             item.setWhitelist();
         }
-        Collection<WSlot> traitment = WSlot.addHeadlessArray(mainInterface, 9, GROWTH_CONTROLLER_INVENTORY, 1, 1);
+        Collection<WSlot> traitment = WSlot.addHeadlessArray(mainInterface, 10, GROWTH_CONTROLLER_INVENTORY, 1, 1);
         for (WSlot item: traitment) {
-            item.accept(Items.AIR);
+            item.accept(HerboCraft.SEEDS);
             item.setWhitelist();
         }
-        Collection<WSlot> output = WSlot.addHeadlessArray(mainInterface, 10, GROWTH_CONTROLLER_INVENTORY, 3, 3);
+        Collection<WSlot> output = WSlot.addHeadlessArray(mainInterface, 11, GROWTH_CONTROLLER_INVENTORY, 3, 3);
         for (WSlot item: output) {
             item.accept(Items.AIR);
             item.setWhitelist();
         }
         WSlot.addHeadlessPlayerInventory(mainInterface);
-        // init the events
-        entity.registerEvents();
     }
 }
 
