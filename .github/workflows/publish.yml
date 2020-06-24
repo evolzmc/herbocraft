@@ -61,7 +61,7 @@ jobs:
         uses: eskatos/gradle-command-action@v1
         with:
           gradle-version: 6.4.1
-          arguments: build
+          arguments: curseforge
         env:
           CURSEFORGE_API_KEY: ${{ secrets.PUBLISH_KEY }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
