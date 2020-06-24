@@ -132,7 +132,7 @@ curseforge {
         addGameVersion "1.16"
 
         relations {
-            requiredDependency 'fabric'
+            requiredDependency 'fabric-api'
         }
         afterEvaluate {
             mainArtifact(remapJar)
