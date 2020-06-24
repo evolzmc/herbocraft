@@ -109,10 +109,11 @@ jar {
 }
 
 curseforge {
+    println "Publishing project..."
     def envApiKey = System.getenv('CURSEFORGE_API_KEY')
     def envChangeLog = System.getenv('CHANGELOG')
-    if (envApiKey == null) {
-        println 'Unable to locate api key in env variable'
+    if (envApiKey == null || envChangeLog == null) {
+        println 'Unable to locate api key or changelog in env variable'
         return
     }
     def versionReleaseType = "release"
@@ -121,7 +122,7 @@ curseforge {
     } else if (version.toString().toLowerCase().contains("alpha")) {
         versionReleaseType = "alpha"
     }
-    println "Publishing project..."
+
     project {
         apiKey = envApiKey
         id = '390001'
@@ -129,8 +130,6 @@ curseforge {
         changelogType = "markdown"
         releaseType = versionReleaseType
         addGameVersion "1.16"
-        addGameVersion "Java 8"
-
 
         relations {
             requiredDependency 'fabric'
