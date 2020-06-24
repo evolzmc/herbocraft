@@ -4,10 +4,12 @@ import com.redblueflame.herbocraft.HerboCraft;
 import com.redblueflame.herbocraft.QualityType;
 import com.redblueflame.herbocraft.utils.UpgradeSpawner;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
@@ -21,21 +23,20 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class GrowthController extends AbstractUpgradableBlock implements BlockEntityProvider {
-    public GrowthController(Settings settings) {
+public class UpgraderBlock extends AbstractUpgradableBlock implements BlockEntityProvider {
+    public UpgraderBlock(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
-
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new GrowthControllerBlockEntity();
+        return new UpgraderBlockEntity();
     }
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.GROWTH_CONTROLLER_CONTAINER, player, (buffer) -> {
+            ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.UPGRADER_CONTAINER, player, (buffer) -> {
                 buffer.writeText(new TranslatableText(this.getTranslationKey()));
                 buffer.writeBlockPos(pos);
             });
@@ -60,7 +61,7 @@ public class GrowthController extends AbstractUpgradableBlock implements BlockEn
     @SuppressWarnings("deprecation")
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
-            GrowthControllerBlockEntity blockEntity = (GrowthControllerBlockEntity) world.getBlockEntity(pos);
+            UpgraderBlockEntity blockEntity = (UpgraderBlockEntity) world.getBlockEntity(pos);
             if (blockEntity != null && blockEntity.inventory != null) {
                 ItemScatterer.spawn(world, pos, blockEntity.inventory);
                 world.updateComparators(pos, this);
@@ -69,6 +70,4 @@ public class GrowthController extends AbstractUpgradableBlock implements BlockEn
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
-
-
 }

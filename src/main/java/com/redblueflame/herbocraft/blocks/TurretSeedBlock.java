@@ -3,31 +3,24 @@ package com.redblueflame.herbocraft.blocks;
 import com.redblueflame.herbocraft.HerboCraft;
 import com.redblueflame.herbocraft.components.LevelComponent;
 import com.redblueflame.herbocraft.entities.TurretBaseEntity;
-import nerdhub.cardinal.components.api.ComponentType;
-import nerdhub.cardinal.components.api.component.BlockComponentProvider;
-import nerdhub.cardinal.components.api.component.Component;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.Optional;
 import java.util.Random;
-import java.util.Set;
 
 public class TurretSeedBlock extends CropBlock implements BlockEntityProvider {
     public static final IntProperty AGE = Properties.AGE_5;
@@ -74,6 +67,21 @@ public class TurretSeedBlock extends CropBlock implements BlockEntityProvider {
         if (random.nextInt(3) != 0) {
             super.randomTick(state, world, pos, random);
         }
+        checkGrowth(state, world, pos);
+    }
+
+    private void checkGrowth(BlockState state, ServerWorld world, BlockPos pos) {
+        if (getAge(state) >= getMaxAge() - 1) {
+            // The plant is at max growth, we delete the block, and summon the turret
+            TurretSeedBlockEntity blockEntity = (TurretSeedBlockEntity) world.getBlockEntity(pos);
+            if (blockEntity == null) {
+                throw new RuntimeException("The block entity was not created.");
+            }
+            Entity entity = getEntity(world, blockEntity.getComponent());
+            entity.teleport(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5);
+            world.spawnEntity(entity);
+            world.breakBlock(pos, false);
+        }
     }
 
     protected int getGrowthAmount(World world) {
@@ -92,17 +100,7 @@ public class TurretSeedBlock extends CropBlock implements BlockEntityProvider {
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         super.grow(world, random, pos, state);
         System.out.println("GROW ! " + getAge(state) + "/" + getMaxAge());
-        if (getAge(state) >= getMaxAge() - 1) {
-            // The plant is at max growth, we delete the block, and summon the turret
-            TurretSeedBlockEntity blockEntity = (TurretSeedBlockEntity) world.getBlockEntity(pos);
-            if (blockEntity == null) {
-                throw new RuntimeException("The block entity was not created.");
-            }
-            Entity entity = getEntity(world, blockEntity.getComponent());
-            entity.teleport(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5);
-            world.spawnEntity(entity);
-            world.breakBlock(pos, false);
-        }
+        checkGrowth(state, world, pos);
     }
 
 
