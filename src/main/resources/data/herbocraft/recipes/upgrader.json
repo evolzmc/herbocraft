@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YIY",
+    "GAG",
+    "XDX"
+  ],
+  "key": {
+    "X": {
+      "item": "herbocraft:gold_plate"
+    },
+    "A": {
+      "item": "herbocraft:machine_frame"
+    },
+    "D": {
+      "item": "minecraft:dirt"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "Y": {
+      "item": "herbocraft:iron_plate"
+    },
+    "I": {
+        "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "herbocraft:reproducer",
+    "count": 1
+  }
+}
