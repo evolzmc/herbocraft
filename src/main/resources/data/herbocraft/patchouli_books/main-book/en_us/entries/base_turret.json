@@ -1,0 +1,17 @@
+{
+  "name": "Base Turret",
+  "icon": "herbocraft:turret_seed",
+  "category": "herbocraft:plants",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This turret is the base of your genetic journey! $(br)The base turret does not have any special ability, but their skills are balanced, and it could make them really powerful weapons when correctly upgraded and breaded.$(br)Attributes: $(li)Can only be created with a $(l:growth_controller)Growth Controller$(/l) at any tier.$(li)Throws bullets deals direct damage."
+    },
+    {
+      "type": "entity",
+      "entity": "herbocraft:turret_base",
+      "name": "Base Turret",
+      "text": "This beautiful plant could kill you with a single pea! Avoiding conflict is recommended"
+    }
+  ]
+}

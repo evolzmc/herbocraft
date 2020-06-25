@@ -39,7 +39,7 @@ dependencies {
     include "com.github.vini2003:spinnery:${project.spinnery_version}"
     modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
     include "io.github.prospector:modmenu:${project.modmenu_version}"
-
+    modImplementation "vazkii.patchouli:Patchouli_1.16-fabric:${project.patchouli_version}"
     //modRuntime ("com.github.Chocohead:Data-Breaker-Lower:24be1a2")
 
     /* this will expose the dependency to anyone building against your mod. You might
@@ -70,7 +70,15 @@ repositories {
         name = "Fabric"
         url = "https://maven.fabricmc.net/"
     }
-    maven { url = "https://jitpack.io" }
+
+    maven {
+        name = "JitPack"
+        url = "https://jitpack.io"
+    }
+    maven {
+        name = "Jared"
+        url = "https://maven.blamejared.com"
+    }
 }
 configurations {
     jar.archiveName = 'herbocraft.jar'

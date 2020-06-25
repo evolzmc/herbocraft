@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "herbocraft:turret_seed"
+    "herbocraft:turret_seed",
+    "herbocraft:snow_seed",
+    "herbocraft:wither_seed"
   ]
 }

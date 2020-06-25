@@ -13,7 +13,7 @@
     "homepage": "https://evolzmc.fr",
     "sources": "https://github.com/evolzmc/herbocraft"
   },
-  "license": "CC0-1.0",
+  "license": "GNU LGPLv3",
   "icon": "assets/herbocraft/icon.png",
   "environment": "*",
   "entrypoints": {

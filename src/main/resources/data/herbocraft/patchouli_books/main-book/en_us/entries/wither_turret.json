@@ -1,0 +1,17 @@
+{
+  "name": "Wither Turret",
+  "icon": "herbocraft:wither_seed",
+  "category": "herbocraft:plants",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This turret is one of the hardest to create as you have managed to inject wither's DNA directly into a standard seed. $(br) $(br)Attributes: $(li)Can only be created with a $(l:growth_controller)Growth Controller$(/l) upgraded at $(l:tier4_upgrade)tier 4$(/l).$(li)Throws bullets that gives wither to the target."
+    },
+    {
+      "type": "entity",
+      "entity": "herbocraft:wither_turret",
+      "name": "Wither Turret",
+      "text": "This beautiful plant could kill you with a single pea, and watch you die slowly in pain! Avoiding conflict is recommended"
+    }
+  ]
+}

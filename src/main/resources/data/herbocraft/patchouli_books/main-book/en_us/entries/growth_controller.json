@@ -1,0 +1,15 @@
+{
+  "name": "Growth Controller",
+  "icon": "herbocraft:growth_controller",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This machine is the key part of the toolkit. It allows to genetically modify seeds of any kind into enemy killer plants. The possible results of the modification depends on the level of the machine: $(li)At $(l:tier2_upgrade)tier 2$(/l), $(l:snow_turret)snow turrets$(/l) are unlocked. $(li)At $(l:tier4_upgrade)tier 4$(/l), $(l:wither_turret)wither turrets$(/l) are unlocked."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:growth_controller"
+    }
+  ]
+}

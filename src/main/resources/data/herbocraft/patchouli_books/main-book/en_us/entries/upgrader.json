@@ -1,0 +1,15 @@
+{
+  "name": "Upgrader",
+  "icon": "herbocraft:upgrader",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This machine allows modifications to the core of the seeds, and makes turrets faster, better, and stronger at the cost of stability."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:upgrader"
+    }
+  ]
+}

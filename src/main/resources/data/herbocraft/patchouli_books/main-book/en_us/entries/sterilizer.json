@@ -1,0 +1,15 @@
+{
+  "name": "Sterilizer",
+  "icon": "herbocraft:sterilizer",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This machine allows for seeds to be fixed completely, and prevent reproduction or upgrading.$(br)This is really useful when you want to sell your best creation while being sure a competitor can't use it."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:sterilizer"
+    }
+  ]
+}

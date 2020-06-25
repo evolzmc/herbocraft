@@ -1,0 +1,17 @@
+{
+  "name": "Snow Turret",
+  "icon": "herbocraft:snow_seed",
+  "category": "herbocraft:plants",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This turret is a little more advanced, and throws snowballs at enemies. This turret shoots a little bit slower than the base one. $(br)Attributes: $(li)Can only be created with a $(l:growth_controller)Growth Controller$(/l) upgraded at $(l:tier2_upgrade)tier 2$(/l).$(li)Throws bullets that slows down enemies"
+    },
+    {
+      "type": "entity",
+      "entity": "herbocraft:snow_turret",
+      "name": "Snow Turret",
+      "text": "If this plant wanted to kill you, it could do it slowly, as you will be stuck in snow."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Tier 2 Upgrades",
+  "icon": "herbocraft:tier2_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This upgrade is the second one. It allows for machines to be faster, and allows the $(l:growth_controller)growth controller$(/l) to produce $(l:snow_turret)Snow Turrets$(/l)."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier2_upgrade"
+    }
+  ]
+}

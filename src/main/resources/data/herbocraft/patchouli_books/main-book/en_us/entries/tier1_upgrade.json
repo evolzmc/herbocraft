@@ -1,0 +1,15 @@
+{
+  "name": "Tier 1 Upgrades",
+  "icon": "herbocraft:tier1_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This upgrade is the most simple to make. It allows for machines to be faster."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier1_upgrade"
+    }
+  ]
+}

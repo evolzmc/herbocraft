@@ -1,0 +1,15 @@
+{
+  "name": "Tier 4 Upgrades",
+  "icon": "herbocraft:tier4_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This upgrade is the highest possible upgrade. It allows for machines to be faster, and allows the and allows the $(l:growth_controller)growth controller$(/l) to produce $(l:wither_turret)Wither Turrets$(/l)."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier4_upgrade"
+    }
+  ]
+}

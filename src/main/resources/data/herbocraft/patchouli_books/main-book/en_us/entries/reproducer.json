@@ -1,0 +1,15 @@
+{
+  "name": "Reproducer",
+  "icon": "herbocraft:reproducer",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "This machine is a beauty, allowing for plants to reproduce in a record time! You just put two plants, and they can produce up to 9 children."
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:reproducer"
+    }
+  ]
+}
