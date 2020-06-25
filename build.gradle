@@ -142,7 +142,7 @@ curseforge {
         changelog = envChangeLog
         changelogType = "markdown"
         releaseType = versionReleaseType
-        addGameVersion "1.16"
+        addGameVersion "1.16.1"
 
         relations {
             requiredDependency 'fabric-api'
