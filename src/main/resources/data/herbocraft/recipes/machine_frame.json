@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XIX",
+    "IYI",
+    "XIX"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "X": {
+      "item": "herbocraft:iron_plate"
+    },
+    "Y": {
+      "item": "herbocraft:iron_gear"
+    }
+  },
+  "result": {
+    "item": "herbocraft:machine_frame",
+    "count": 1
+  }
+}

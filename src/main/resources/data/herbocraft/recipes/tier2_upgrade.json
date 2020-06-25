@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "GPG",
+    "IGI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "herbocraft:gold_gear"
+    },
+    "P": {
+      "item": "herbocraft:gold_plate"
+    }
+  },
+  "result": {
+    "item": "herbocraft:tier2_upgrade",
+    "count": 1
+  }
+}

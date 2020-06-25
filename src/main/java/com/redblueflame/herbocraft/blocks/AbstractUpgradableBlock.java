@@ -10,7 +10,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 
 public abstract class AbstractUpgradableBlock extends BlockWithEntity {
-    public static final IntProperty UPGRADE_LEVEL = IntProperty.of("upgrade", 0, QualityType.getLevelCount());
+    public static final IntProperty UPGRADE_LEVEL = IntProperty.of("upgrade", 0, QualityType.getLevelCount()-1);
     protected AbstractUpgradableBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(UPGRADE_LEVEL, 0));

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GAG",
+    "XBX"
+  ],
+  "key": {
+    "X": {
+      "item": "herbocraft:iron_plate"
+    },
+    "A": {
+      "item": "herbocraft:machine_frame"
+    },
+    "B": {
+      "item": "minecraft:dirt"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "herbocraft:reproducer",
+    "count": 1
+  }
+}

@@ -1,6 +1,8 @@
 package com.redblueflame.herbocraft;
 
+import com.redblueflame.herbocraft.entities.renderer.SnowTurretRenderer;
 import com.redblueflame.herbocraft.entities.renderer.TurretBaseRenderer;
+import com.redblueflame.herbocraft.entities.renderer.WitherTurretRenderer;
 import com.redblueflame.herbocraft.ui.GrowthControllerInterface;
 import com.redblueflame.herbocraft.ui.ReproducerBlockInterface;
 import com.redblueflame.herbocraft.ui.SterilizerInterface;
@@ -29,7 +31,11 @@ public class HerboCraftClient implements ClientModInitializer {
         ScreenProviderRegistry.INSTANCE.registerFactory(HerboCraft.UPGRADER_CONTAINER, UpgraderBlockInterface::new);
         EntityRendererRegistry.INSTANCE.register(HerboCraft.TURRET_BASE, (dispatcher, context) -> new TurretBaseRenderer(dispatcher));
         EntityRendererRegistry.INSTANCE.register(HerboCraft.BULLET, (dispatcher, context) -> new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
+        EntityRendererRegistry.INSTANCE.register(HerboCraft.SNOW_TURRET, (entityRenderDispatcher, context) -> new SnowTurretRenderer(entityRenderDispatcher));
+        EntityRendererRegistry.INSTANCE.register(HerboCraft.WITHER_TURRET, (entityRenderDispatcher, context) -> new WitherTurretRenderer(entityRenderDispatcher));
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.TURRET_SEED_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.WITHER_SEED_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.SNOW_SEED_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.STERILIZER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.REPRODUCER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(HerboCraft.MACHINE_FRAME, RenderLayer.getCutout());

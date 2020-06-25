@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "herbocraft:block/snow_seed/snow_seed_stage4"
+  }
+}

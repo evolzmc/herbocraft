@@ -35,8 +35,7 @@ import net.minecraft.world.World;
 public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob {
     private static final TrackedData<Byte> TURRET_BASE_FLAGS;
     private Goal projectileGoal;
-    private float damage = 40F;
-    private BulletEffect bulletEffect = new BulletEffect(StatusEffects.SLOWNESS, 5, 1);
+    public float damage = 40F;
 
     static {
         TURRET_BASE_FLAGS = DataTracker.registerData(TurretBaseEntity.class, TrackedDataHandlerRegistry.BYTE);
@@ -85,7 +84,7 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     }
     @Override
     public void attack(LivingEntity target, float pullProgress) {
-        BulletEntity bulletEntity = BulletEntity.getWithOwner(this.world, this, this.damage, this.bulletEffect);
+        BulletEntity bulletEntity = getBulletEntity();
         double d = target.getEyeY() - 1.100000023841858D;
         double e = target.getX() - this.getX();
         double f = d - bulletEntity.getY();
@@ -94,6 +93,14 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
         bulletEntity.setVelocity(e, f + (double) h, g, 1.2F, 2.0F);
         this.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.world.spawnEntity(bulletEntity);
+    }
+
+    public BulletEntity getBulletEntity() {
+        return BulletEntity.getWithOwner(this.world, this, this.damage, null);
+    }
+
+    public float getDamage() {
+        return damage;
     }
 
     @Override

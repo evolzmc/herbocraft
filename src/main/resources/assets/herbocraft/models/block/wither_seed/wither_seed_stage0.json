@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "herbocraft:block/wither_seed/wither_seed_stage0"
+  }
+}

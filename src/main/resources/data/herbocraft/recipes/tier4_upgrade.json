@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "GPG",
+    "IGI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:obsidian"
+    },
+    "G": {
+      "item": "herbocraft:diamond_gear"
+    },
+    "P": {
+      "item": "herbocraft:diamond_plate"
+    }
+  },
+  "result": {
+    "item": "herbocraft:tier4_upgrade",
+    "count": 1
+  }
+}

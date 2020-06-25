@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "GOG",
+    "IGI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "item": "herbocraft:iron_gear"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "herbocraft:tier3_upgrade",
+    "count": 1
+  }
+}

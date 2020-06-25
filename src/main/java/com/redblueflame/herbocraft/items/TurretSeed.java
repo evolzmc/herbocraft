@@ -6,6 +6,7 @@ import com.redblueflame.herbocraft.components.Converters;
 import com.redblueflame.herbocraft.components.LevelComponent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -32,8 +33,8 @@ import java.util.List;
 
 
 public class TurretSeed extends BlockItem  {
-    public TurretSeed(Settings settings) {
-        super(HerboCraft.TURRET_SEED_BLOCK, settings);
+    public TurretSeed(Block block, Settings settings) {
+        super(block, settings);
     }
 
     @Override

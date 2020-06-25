@@ -3,7 +3,33 @@
     {
       id: "herbocraft:turret_seed",
       minimalType: "STANDARD",
+      probability: 5,
+      level: {
+        min: 5,
+        max: 10
+      },
+      stability: {
+        min: 200,
+        max: 255
+      }
+    },
+    {
+      id: "herbocraft:wither_seed",
+      minimalType: "TIER4",
       probability: 1,
+      level: {
+        min: 10,
+        max: 20
+      },
+      stability: {
+        min: 200,
+        max: 255
+      }
+    },
+    {
+      id: "herbocraft:snow_seed",
+      minimalType: "TIER2",
+      probability: 3,
       level: {
         min: 5,
         max: 10

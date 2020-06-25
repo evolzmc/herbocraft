@@ -32,7 +32,7 @@ public class UpgraderBlockContainer extends BaseContainer {
         WInterface mainInterface = getInterface();
         if (entity.inventory == null) {
             // Contains the 1 input and 9 outputs.
-            entity.inventory = new BaseInventory(19);
+            entity.inventory = new BaseInventory(20);
         }
         getInventories().put(GROWTH_CONTROLLER_INVENTORY, entity.inventory);
         mainInterface.createChild(WSlot::new);

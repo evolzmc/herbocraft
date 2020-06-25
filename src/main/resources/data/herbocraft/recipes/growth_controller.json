@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GIG",
+    "YAY",
+    "XFX"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "X": {
+      "item": "herbocraft:iron_plate"
+    },
+    "A": {
+      "item": "herbocraft:machine_frame"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "Y": {
+        "item": "herbocraft:iron_gear"
+    }
+  },
+  "result": {
+    "item": "herbocraft:growth_controller",
+    "count": 1
+  }
+}

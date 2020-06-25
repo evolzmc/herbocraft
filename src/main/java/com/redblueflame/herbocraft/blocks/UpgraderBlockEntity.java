@@ -160,7 +160,7 @@ public class UpgraderBlockEntity extends BlockEntity implements Tickable {
         return -1;
     }
     private int getFirstAvailableSlot() {
-        for (int i = 10; i < 20; i++) {
+        for (int i = 11; i < 20; i++) {
             if (inventory.getStack(i).isEmpty()) {
                 return i;
             }

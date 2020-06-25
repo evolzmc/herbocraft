@@ -7,10 +7,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
 public class TurretLooter {
+    private static Logger LOGGER = LogManager.getLogger();
     private static Random random;
     public List<TurretDrop> drops;
     public TurretLooter() {
@@ -59,8 +62,10 @@ public class TurretLooter {
     public TurretDrop drawRandomTurret(QualityType type) {
         List<TurretDrop> drops = getDropsForMachine(type);
         int max = drops.stream().mapToInt(turretDrop -> turretDrop.probability).sum();
-        int current = random.nextInt(max);
+
+        int current = random.nextInt(max+1);
         for (TurretDrop drop: drops) {
+            LOGGER.info(drop.probability + " - " + current);
             if (drop.probability >= current) {
                 // This is the chosen one
                 return drop;
