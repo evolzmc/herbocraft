@@ -81,7 +81,12 @@ repositories {
     }
 }
 configurations {
-    jar.archiveName = 'herbocraft.jar'
+    if (getVersion() == 'dev') {
+        println "You are in development mode !"
+        jar.archiveName = 'herbocraft.jar'
+    } else {
+        jar.archiveName = 'herbocraft-' + getVersion() + ".jar"
+    }
 }
 processResources {
     inputs.property "version", project.version
