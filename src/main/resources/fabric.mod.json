@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "id": "herbocraft",
   "version": "${version}",
-  "name": "herbocraft",
+  "name": "Herbocraft",
   "description": "A mod where you mix a towerdefense with minecraft and genetics",
   "authors": [
-    "EvolzMC Team <Blooskyd",
+    "Blooskyd",
     "Ziedelth",
-    "Redblueflame>"
+    "Redblueflame"
   ],
   "contact": {
     "homepage": "https://evolzmc.fr",
