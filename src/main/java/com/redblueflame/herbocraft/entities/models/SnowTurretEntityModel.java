@@ -38,7 +38,7 @@ public class SnowTurretEntityModel extends EntityModel<SnowTurretEntity> {
 
         Base = new ModelPart(this);
         Base.setPivot(0.0F, 24.0F, 0.0F);
-        setRotationAngle(Base, 0, 1.570796F, 0);
+        setRotationAngle(Base, 0, -1.570796F, 0);
 
         Tige = new ModelPart(this);
         Tige.setPivot(0.0F, 0.0F, 0.0F);
