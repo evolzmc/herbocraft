@@ -13,6 +13,7 @@ import com.redblueflame.herbocraft.items.TurretAnalyzer;
 import com.redblueflame.herbocraft.items.TurretSeed;
 import com.redblueflame.herbocraft.items.UpgradeItem;
 import com.redblueflame.herbocraft.items.WateringCanItem;
+import com.redblueflame.herbocraft.utils.PatchouliBookRecipe;
 import com.redblueflame.herbocraft.utils.TurretLooter;
 import io.netty.buffer.Unpooled;
 import nerdhub.cardinal.components.api.ComponentRegistry;
@@ -38,6 +39,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -222,6 +225,9 @@ public class HerboCraft implements ModInitializer {
                 (syncId, id, player, buf) -> new ReproducerBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
         ContainerProviderRegistry.INSTANCE.registerFactory(UPGRADER_CONTAINER,
                 (syncId, id, player, buf) -> new UpgraderBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
+        // Register recipes
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(name, "patchouli_book"), new PatchouliBookRecipe.Serializer());
+
         // region Packets
         ServerSidePacketRegistry.INSTANCE.register(HerboCraftPackets.WATERING_CAN_USAGE_PACKET, (packetContext, packetByteBuf) -> {
             BlockPos pos = packetByteBuf.readBlockPos();

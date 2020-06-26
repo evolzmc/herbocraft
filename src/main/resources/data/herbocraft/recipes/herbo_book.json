@@ -1,21 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "BS"
-  ],
-  "key": {
-    "B": {
-        "item": "minecraft:book"
+  "type": "herbocraft:patchouli_book",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
     },
-    "S": {
-        "item": "minecraft:wheat_seeds"
+    {
+      "item": "minecraft:wheat_seeds"
     }
-  },
-  "result": {
-    "item": "patchouli:guide_book",
-    "nbt": {
-      "patchouli:book": "herbocraft:main-book"
-    },
-    "count": 1
-  }
+  ],
+  "book": "herbocraft:main-book"
 }
