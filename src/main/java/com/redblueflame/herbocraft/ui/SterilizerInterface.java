@@ -37,13 +37,13 @@ public class SterilizerInterface extends BaseContainerScreen<SterilizerBlockCont
 
         img = mainPanel.createChild(WVerticalLoadingBar::new, Position.of(mainPanel, ((mainPanel.getWidth()) / 2) - 7, 55-6-14*2.5F, 2), Size.of(14, 14*2.5F)).setParent(mainInterface);
         img.setTexture(new Identifier(HerboCraft.name, "textures/ui/filled.png"));
-        img.setState(container.entity.progression);
+        img.setState((short) container.entity.state);
         mainPanel.add(base);
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
-        img.setState(getContainer().entity.progression);
+        img.setState((short) getContainer().entity.state);
         super.render(matrices, mouseX, mouseY, tickDelta);
     }
 }

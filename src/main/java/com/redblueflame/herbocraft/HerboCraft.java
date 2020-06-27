@@ -71,7 +71,7 @@ public class HerboCraft implements ModInitializer {
     // Utils
     public static Gson GSON;
     public static TurretLooter LOOTS;
-    private static Logger LOGGER = LogManager.getLogger();
+    public static Logger LOGGER = LogManager.getLogger();
 
     public static Tag<Item> SEEDS;
     public static Tag<Item> BASE_SEEDS;

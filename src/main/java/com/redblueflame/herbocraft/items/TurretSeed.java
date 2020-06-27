@@ -45,7 +45,6 @@ public class TurretSeed extends BlockItem  {
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> lines, TooltipContext ctx) {
-        super.appendTooltip(stack, world, lines, ctx);
         LevelComponent comp = HerboCraft.LEVELLING.get(stack);
         lines.add(new TranslatableText("level_tooltips.health", comp.getHealth()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
         DecimalFormat numberFormat = new DecimalFormat("#.00");

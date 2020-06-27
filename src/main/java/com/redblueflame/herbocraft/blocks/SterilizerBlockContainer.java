@@ -27,9 +27,7 @@ public class SterilizerBlockContainer extends BaseContainer {
     }
     private void initInventory() {
         WInterface mainInterface = getInterface();
-        if (entity.inventory == null) {
-            entity.inventory = new BaseInventory(1);
-        }
+
         getInventories().put(STERILIZER_INVENTORY, entity.inventory);
         mainInterface.createChild(WSlot::new);
         Collection<WSlot> items = WSlot.addHeadlessArray(mainInterface, 0, STERILIZER_INVENTORY, 1, 1);

@@ -26,7 +26,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         health = 5;
         attackSpeed = 1;
         damage = 2;
-        durability = 5;
+        durability = 200;
         stability = 255;
         sterile = false;
     }
@@ -85,8 +85,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         target.setAttackSpeed(Math.min(this.attackSpeed, other.getAttackSpeed()) + rdm.nextFloat()*(sep_attack_speed));
         sep = Math.abs(this.damage - other.getDamage());
         target.setDamage(Math.min(this.damage, other.getDamage()) + rdm.nextInt(sep+1));
-        sep = Math.abs(this.durability - other.getDurability());
-        target.setDurability(Math.min(this.durability, other.getDurability()) + rdm.nextInt((sep/4)+1));
+        target.setDurability(Math.min(this.durability, other.getDurability()) + rdm.nextInt(50));
         target.setStability(200 + rdm.nextInt(55));
     }
 

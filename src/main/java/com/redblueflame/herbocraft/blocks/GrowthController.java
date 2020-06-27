@@ -21,7 +21,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class GrowthController extends AbstractUpgradableBlock implements BlockEntityProvider {
+public class GrowthController extends AbstractProgressBlock {
     public GrowthController(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
@@ -34,6 +34,7 @@ public class GrowthController extends AbstractUpgradableBlock implements BlockEn
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        super.onUse(state, world, pos, player, hand, hit);
         if (!world.isClient) {
             ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.GROWTH_CONTROLLER_CONTAINER, player, (buffer) -> {
                 buffer.writeText(new TranslatableText(this.getTranslationKey()));

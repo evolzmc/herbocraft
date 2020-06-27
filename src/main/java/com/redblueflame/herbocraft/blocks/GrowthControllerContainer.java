@@ -30,10 +30,6 @@ public class GrowthControllerContainer extends BaseContainer {
 
     private void initInventory() {
         WInterface mainInterface = getInterface();
-        if (entity.inventory == null) {
-            // Contains the 1 input and 9 outputs.
-            entity.inventory = new BaseInventory(10);
-        }
         getInventories().put(GROWTH_CONTROLLER_INVENTORY, entity.inventory);
         mainInterface.createChild(WSlot::new);
         Collection<WSlot> input = WSlot.addHeadlessArray(mainInterface, 0, GROWTH_CONTROLLER_INVENTORY, 1, 1);
