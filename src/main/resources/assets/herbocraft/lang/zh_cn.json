@@ -24,7 +24,7 @@
 	"level_tooltips.attack_speed": "攻击速度: %d",
 	"level_tooltips.damage": "伤害: %d",
 	"level_tooltips.durability": "种子质量: %d",
-	"level_tooltips.stability": "易变性: %d",
+	"level_tooltips.stability": "突变性: %d",
 	"level_tooltips.stability.none": "0",
 	"level_tooltips.stability.ultra-low": "非常低",
 	"level_tooltips.stability.low": "低",
