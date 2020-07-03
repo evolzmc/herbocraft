@@ -17,7 +17,7 @@
 	"block.herbocraft.turret_seed": "豌豆射手种子",
 	"block.herbocraft.snow_seed": "寒冰射手种子",
 	"block.herbocraft.wither_seed": "凋零射手种子",
-	"block.herbocraft.reproducer": "复制机",
+	"block.herbocraft.reproducer": "繁衍机",
 	"block.herbocraft.machine_frame": "机器框架",
 	"block.herbocraft.upgrader": "升级器",
 	"level_tooltips.health": "血量: %d",
