@@ -1,0 +1,17 @@
+{
+  "name": "豌豆射手",
+  "icon": "herbocraft:turret_seed",
+  "category": "herbocraft:plants",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个射手是你的基因旅途的开始！ $(br)豌豆射手没有任何特殊能力，但它的属性很平衡，并且经过正确的培育，它可以升级为更强大的武器。$(br)属性： $(li)只能使用$(l:growth_controller)生长调节器$(/l) 生长。$(li)射出豌豆直接造成伤害。"
+    },
+    {
+      "type": "entity",
+      "entity": "herbocraft:turret_base",
+      "name": "豌豆射手",
+      "text": "这株漂亮的植物可以用豌豆喷死你！最好不要惹它。"
+    }
+  ]
+}

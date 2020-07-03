@@ -1,0 +1,15 @@
+{
+  "name": "繁衍机",
+  "icon": "herbocraft:reproducer",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个机器可以每隔一段时间繁衍一次植物！放入两株同类植物即可繁衍出最多9株子代。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:reproducer"
+    }
+  ]
+}

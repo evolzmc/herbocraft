@@ -1,0 +1,17 @@
+{
+  "name": "凋零射手",
+  "icon": "herbocraft:wither_seed",
+  "category": "herbocraft:plants",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个射手需要你将凋零的DNA注入到种子中。$(br) $(br)属性：$(li)只能使用$(l:growth_controller)生长调节器$(/l)升到$(l:tier4_upgrade)4级$(/l).$(li)喷射出使目标凋零的豌豆。"
+    },
+    {
+      "type": "entity",
+      "entity": "herbocraft:wither_turret",
+      "name": "凋零射手",
+      "text": "这株漂亮的植物可以使你在痛苦中缓慢死去！最好不要惹它"
+    }
+  ]
+}

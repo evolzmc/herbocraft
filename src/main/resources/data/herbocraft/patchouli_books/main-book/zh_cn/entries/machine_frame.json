@@ -1,0 +1,15 @@
+{
+  "name": "机器框架",
+  "icon": "herbocraft:growth_controller",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个方块可用于合成这个类别内的其它机器。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:machine_frame"
+    }
+  ]
+}

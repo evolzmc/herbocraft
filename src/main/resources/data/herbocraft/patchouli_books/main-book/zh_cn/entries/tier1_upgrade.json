@@ -1,0 +1,15 @@
+{
+  "name": "升到1级",
+  "icon": "herbocraft:tier1_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这是最简单的升级。可以让机器更高效地运作。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier1_upgrade"
+    }
+  ]
+}

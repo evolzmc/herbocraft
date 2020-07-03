@@ -1,0 +1,15 @@
+{
+  "name": "升到4级",
+  "icon": "herbocraft:tier4_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这是目前的最高级了。可以让机器更高效地运作，并可以用$(l:growth_controller)生长调节器$(/l)产出$(l:wither_turret)凋零射手$(/l)。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier4_upgrade"
+    }
+  ]
+}

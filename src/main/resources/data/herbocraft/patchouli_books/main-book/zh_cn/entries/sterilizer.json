@@ -1,0 +1,15 @@
+{
+  "name": "植物灭菌器",
+  "icon": "herbocraft:sterilizer",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个机器可以完全固定你的植物，使其无法产生后代或升级。$(br)当你想出售自己最好的植物而又又让竞争者不能使用它时很有用。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:sterilizer"
+    }
+  ]
+}
