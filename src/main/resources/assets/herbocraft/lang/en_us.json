@@ -33,5 +33,8 @@
 	"level_tooltips.stability.extreme": "Extreme",
 	"level_tooltips.stability.unknown": "Unknown",
 	"level_tooltips.sterile.true": "Sterile !",
+	"entity.herbocraft.turret_base": "Basic Turret",
+	"entity.herbocraft.snow_turret": "Snow Turret",
+	"entity.herbocraft.wither_turret": "Wither Turret",
 	"upgrade.skipped_level": "Seems like you skipped a level ! Please apply the previous ones before"
 }
