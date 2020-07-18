@@ -1,0 +1,15 @@
+{
+  "name": "生长调节器",
+  "icon": "herbocraft:growth_controller",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个机器是工具箱的关键部分。它可以对任何种类的种子进行基因改造，使之成为杀手植物。基因改造的结果取决于机器的等级: $(li) $(l:tier2_upgrade)tier 2$(/l)解锁$(l:snow_turret)snow turrets$(/l)。 $(li) $(l:tier4_upgrade)tier 4$(/l)解锁$(l:wither_turret)wither turrets$(/l)。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:growth_controller"
+    }
+  ]
+}
