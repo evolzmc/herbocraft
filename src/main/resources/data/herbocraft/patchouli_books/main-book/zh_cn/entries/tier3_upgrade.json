@@ -1,0 +1,15 @@
+{
+  "name": "升到3级",
+  "icon": "herbocraft:tier3_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "升到第3级有点难度，可以让机器更高效地运作。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier3_upgrade"
+    }
+  ]
+}

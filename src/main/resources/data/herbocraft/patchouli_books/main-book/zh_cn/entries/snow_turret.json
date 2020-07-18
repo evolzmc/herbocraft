@@ -1,0 +1,17 @@
+{
+  "name": "寒冰射手",
+  "icon": "herbocraft:snow_seed",
+  "category": "herbocraft:plants",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个射手更加高级，会向敌人喷射雪球。但它的射速比普通的豌豆射手更慢。 $(br)属性： $(li)只能使用$(l:growth_controller)生长调节器$(/l)生长。 upgraded at $(l:tier2_upgrade)tier 2$(/l).$(li)喷射出减缓移速的豌豆"
+    },
+    {
+      "type": "entity",
+      "entity": "herbocraft:snow_turret",
+      "name": "寒冰射手",
+      "text": "如果它想杀你，那么你会慢慢地冻死。"
+    }
+  ]
+}

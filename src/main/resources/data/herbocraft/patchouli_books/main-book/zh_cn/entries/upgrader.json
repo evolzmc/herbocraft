@@ -1,0 +1,15 @@
+{
+  "name": "升级器",
+  "icon": "herbocraft:upgrader",
+  "category": "herbocraft:machines",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这个机器可以以稳定性为代价修改种子的各项属性。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:upgrader"
+    }
+  ]
+}

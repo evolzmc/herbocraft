@@ -1,0 +1,15 @@
+{
+  "name": "升到2级",
+  "icon": "herbocraft:tier2_upgrade",
+  "category": "herbocraft:upgrades",
+  "pages": [
+    {
+      "type": "text",
+      "text": "这是第2级。可以让机器更高效地运作，并且可以用$(l:growth_controller)生长调节器$(/l)产出$(l:snow_turret)寒冰射手$(/l)。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "herbocraft:tier2_upgrade"
+    }
+  ]
+}
