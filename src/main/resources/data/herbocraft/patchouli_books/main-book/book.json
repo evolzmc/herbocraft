@@ -1,5 +1,5 @@
 {
-  "name": "Geneticist's Handbook",
-  "landing_text": "Welcome, sorcerer's apprentice ! $(br2) This book will be your guidance for how to manipulate plant's genetics for your own security.",
+  "name": "item.herbocraft.manual",
+  "landing_text": "text.herbocraft.manual.landing",
   "version": 1
 }

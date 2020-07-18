@@ -12,6 +12,7 @@
 	"item.herbocraft.tier2_upgrade": "Gold Upgrade",
 	"item.herbocraft.tier3_upgrade": "Emerald Upgrade",
 	"item.herbocraft.tier4_upgrade": "Diamond Upgrade",
+	"item.herbocraft.manual": "Geneticist's Handbook",
 	"block.herbocraft.sterilizer": "Plant Sterilizer",
 	"block.herbocraft.growth_controller": "Growth Controller",
 	"block.herbocraft.turret_seed": "Basic Turret Seed",
@@ -33,5 +34,9 @@
 	"level_tooltips.stability.extreme": "Extreme",
 	"level_tooltips.stability.unknown": "Unknown",
 	"level_tooltips.sterile.true": "Sterile !",
+	"entity.herbocraft.turret_base": "Basic Turret",
+	"entity.herbocraft.snow_turret": "Snow Turret",
+	"entity.herbocraft.wither_turret": "Wither Turret",
+	"text.herbocraft.manual.landing": "Welcome, sorcerer's apprentice ! $(br2) This book will be your guidance for how to manipulate plant's genetics for your own security.",
 	"upgrade.skipped_level": "Seems like you skipped a level ! Please apply the previous ones before"
 }
