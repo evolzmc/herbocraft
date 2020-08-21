@@ -4,6 +4,8 @@ import com.redblueflame.herbocraft.HerboCraft;
 import com.redblueflame.herbocraft.blocks.TurretSeedBlockEntity;
 import com.redblueflame.herbocraft.components.Converters;
 import com.redblueflame.herbocraft.components.LevelComponent;
+import com.redblueflame.herbocraft.components.TurretLevelComponent;
+import com.redblueflame.herbocraft.utils.ComponentsHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -42,11 +44,25 @@ public class TurretSeed extends BlockItem  {
         return super.isIn(tag);
     }
 
+
+    @Override
+    public boolean postProcessTag(CompoundTag tag) {
+        CompoundTag subtag = new CompoundTag();
+        subtag = ComponentsHandler.createComponentTag(subtag);
+        tag.put("LevelComponent", subtag);
+        return true;
+    }
+
     @Environment(EnvType.CLIENT)
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> lines, TooltipContext ctx) {
-        super.appendTooltip(stack, world, lines, ctx);
-        LevelComponent comp = HerboCraft.LEVELLING.get(stack);
+        LevelComponent comp = ComponentsHandler.getItemComponent(stack);
+
+        if (comp == null) {
+            // HerboCraft.LOGGER.error("The seed does not have the component attached to it !");
+            lines.add(new TranslatableText("level_tooltips.unknown").setStyle(Style.EMPTY.withColor(Formatting.YELLOW)));
+            return;
+        }
         lines.add(new TranslatableText("level_tooltips.health", comp.getHealth()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
         DecimalFormat numberFormat = new DecimalFormat("#.00");
 
@@ -61,7 +77,8 @@ public class TurretSeed extends BlockItem  {
 
     @Override
     protected boolean postPlacement(BlockPos pos, World world, PlayerEntity player, ItemStack stack, BlockState state) {
-        LevelComponent comp = HerboCraft.LEVELLING.get(stack);
+        System.out.println("Adding component!");
+        LevelComponent comp = ComponentsHandler.getItemComponent(stack);
         return writeTagToBlockEntity(world, player, pos, stack, comp);
     }
 
@@ -74,11 +91,6 @@ public class TurretSeed extends BlockItem  {
                     return false;
                 }
 
-                CompoundTag compoundTag2 = blockEntity.toTag(new CompoundTag());
-                compoundTag2.putInt("x", pos.getX());
-                compoundTag2.putInt("y", pos.getY());
-                compoundTag2.putInt("z", pos.getZ());
-                blockEntity.fromTag(world.getBlockState(pos), compoundTag2);
                 // Also put the components here
                 if (!(blockEntity instanceof TurretSeedBlockEntity)) {
                     System.out.println("There is a problem, the block entity is not the expected one...");
@@ -86,10 +98,17 @@ public class TurretSeed extends BlockItem  {
                     return true;
                 }
                 ((TurretSeedBlockEntity) blockEntity).setComponent(component);
+
+                CompoundTag compoundTag2 = blockEntity.toTag(new CompoundTag());
+                compoundTag2.putInt("x", pos.getX());
+                compoundTag2.putInt("y", pos.getY());
+                compoundTag2.putInt("z", pos.getZ());
+                blockEntity.fromTag(world.getBlockState(pos), compoundTag2);
                 blockEntity.markDirty();
                 return true;
             }
         }
         return false;
     }
+
 }

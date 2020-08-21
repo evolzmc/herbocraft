@@ -15,6 +15,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import java.io.Console;
 import java.util.Optional;
 import java.util.logging.Level;
 
@@ -26,17 +27,20 @@ public class TurretAnalyzer extends Item {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        Optional<LevelComponent> opt_comp = HerboCraft.LEVELLING.maybeGet(entity);
-        if (user.isSneaking() && opt_comp.isPresent() && currentId != entity.getEntityId()) {
+        if (!(entity instanceof TurretBaseEntity)) {
+            return ActionResult.FAIL;
+        }
+        TurretBaseEntity turretEntity = (TurretBaseEntity) entity;
+        if (user.isSneaking() && turretEntity.getComponent() != null && currentId != entity.getEntityId()) {
             currentId = entity.getEntityId();
-            LevelComponent comp = opt_comp.get();
+            LevelComponent comp = turretEntity.getComponent();
             user.sendMessage(new TranslatableText("level_tooltips.health", comp.getHealth()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false);
             user.sendMessage(new TranslatableText("level_tooltips.attack_speed", comp.getAttackSpeed()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false);
             user.sendMessage(new TranslatableText("level_tooltips.damage", comp.getDamage()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false);
             user.sendMessage(new TranslatableText("level_tooltips.durability", Converters.getKeyFromQuality(Converters.getQualityFromDurability(comp.getDurability()))).setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false);
             user.sendMessage(new TranslatableText("level_tooltips.stability", Converters.getKeyFromQuality(Converters.getQualityFromStability(comp.getStability()))).setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false);
-        } else if (!opt_comp.isPresent() && entity instanceof TurretBaseEntity) {
-            System.out.println("There were an error, the component is not present !");
+        } else if (turretEntity.getComponent() == null) {
+            HerboCraft.LOGGER.warn("The turret component is not initialized !");
         }
         return ActionResult.PASS;
     }

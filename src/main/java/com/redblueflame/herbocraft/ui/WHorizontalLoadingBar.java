@@ -16,7 +16,7 @@ public class WHorizontalLoadingBar extends WStaticImage {
     }
 
     @Override
-    public void draw(MatrixStack matrices, VertexConsumerProvider.Immediate provider) {
+    public void draw(MatrixStack matrices, VertexConsumerProvider provider) {
         if (!this.isHidden()) {
             float x = this.getX();
             float y = this.getY();

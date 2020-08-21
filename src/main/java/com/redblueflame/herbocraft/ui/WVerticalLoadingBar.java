@@ -18,7 +18,7 @@ public class WVerticalLoadingBar extends WStaticImage {
     }
 
     @Override
-    public void draw(MatrixStack matrices, VertexConsumerProvider.Immediate provider) {
+    public void draw(MatrixStack matrices, VertexConsumerProvider provider) {
         if (!this.isHidden()) {
             float height = this.getHeight() * (state / 255F);
             float x = this.getX();

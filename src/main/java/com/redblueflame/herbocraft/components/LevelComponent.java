@@ -6,7 +6,7 @@ import nerdhub.cardinal.components.api.component.extension.CopyableComponent;
 import java.util.Random;
 
 
-public interface LevelComponent extends Component, CopyableComponent<LevelComponent> {
+public interface LevelComponent extends Component {
     int getHealth();
     void setHealth(int health);
     float getAttackSpeed();

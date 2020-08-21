@@ -7,14 +7,14 @@ import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import spinnery.common.container.BaseContainer;
+import spinnery.common.handler.BaseScreenHandler;
 import spinnery.common.inventory.BaseInventory;
 import spinnery.widget.WInterface;
 import spinnery.widget.WSlot;
 
 import java.util.Collection;
 
-public class ReproducerBlockContainer extends BaseContainer {
+public class ReproducerBlockContainer extends BaseScreenHandler {
     public ReproducerBlockEntity entity;
     public static final int GROWTH_CONTROLLER_INVENTORY = 1;
     public Text name;
@@ -31,7 +31,6 @@ public class ReproducerBlockContainer extends BaseContainer {
     private void initInventory() {
         WInterface mainInterface = getInterface();
         if (entity.inventory == null) {
-            // Contains the 1 input and 9 outputs.
             entity.inventory = new BaseInventory(11);
         }
         getInventories().put(GROWTH_CONTROLLER_INVENTORY, entity.inventory);

@@ -6,14 +6,15 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import spinnery.common.container.BaseContainer;
+
+import spinnery.common.handler.BaseScreenHandler;
 import spinnery.common.inventory.BaseInventory;
 import spinnery.widget.WInterface;
 import spinnery.widget.WSlot;
 
 import java.util.Collection;
 
-public class SterilizerBlockContainer extends BaseContainer {
+public class SterilizerBlockContainer extends BaseScreenHandler {
     public SterilizerBlockEntity entity;
     public static final int STERILIZER_INVENTORY = 1;
     public Text name;

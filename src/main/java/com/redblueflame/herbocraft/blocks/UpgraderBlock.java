@@ -23,7 +23,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class UpgraderBlock extends AbstractUpgradableBlock implements BlockEntityProvider {
+public class UpgraderBlock extends AbstractProgressBlock {
     public UpgraderBlock(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
@@ -35,6 +35,7 @@ public class UpgraderBlock extends AbstractUpgradableBlock implements BlockEntit
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        super.onUse(state, world, pos, player, hand, hit);
         if (!world.isClient) {
             ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.UPGRADER_CONTAINER, player, (buffer) -> {
                 buffer.writeText(new TranslatableText(this.getTranslationKey()));

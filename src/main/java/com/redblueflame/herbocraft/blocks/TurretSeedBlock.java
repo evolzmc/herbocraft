@@ -39,14 +39,9 @@ public class TurretSeedBlock extends CropBlock implements BlockEntityProvider {
 
     public Entity getEntity(World world, LevelComponent itemComp) {
         TurretBaseEntity entity = new TurretBaseEntity(HerboCraft.TURRET_BASE, world);
-        // Set the Level Component
-        Optional<LevelComponent> opt_comp = HerboCraft.LEVELLING.maybeGet(entity);
-        if (!opt_comp.isPresent()) {
-            throw new RuntimeException("Seems like the entity isn't compatible with the custom tags. Please check your entry.");
-        }
-        LevelComponent entityComp = opt_comp.get();
-        entityComp.copyFrom(itemComp);
-        entity.setAttributes(entityComp);
+        
+        entity.setComponent(itemComp);
+        entity.setAttributes();
         return entity;
     }
 

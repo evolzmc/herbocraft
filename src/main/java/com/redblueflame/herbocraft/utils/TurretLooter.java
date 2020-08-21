@@ -46,17 +46,13 @@ public class TurretLooter {
         TurretDrop pickedDrop = drawRandomTurret(quality);
         Item pickedItem = Registry.ITEM.get(Identifier.tryParse(pickedDrop.id));
         ItemStack itemStack = new ItemStack(pickedItem, 1);
-        // Add cardinal components to it
-        Optional<LevelComponent> opt_comp = HerboCraft.LEVELLING.maybeGet(itemStack);
-        if (!opt_comp.isPresent()) {
-            // This is not a plant that's compatible...
-            throw new RuntimeException("This plant is not compatible with the LevelComponent. Please fix that");
-        }
-        LevelComponent comp = opt_comp.get();
+        // As this is a new item, we can directly create a new component
+        LevelComponent comp = ComponentsHandler.createItemComponent(itemStack);
         // Get the levels needed
         comp.resetLevels();
         comp.addLevels(pickedDrop.level.getRandom(random));
         comp.setStability(pickedDrop.stability.getRandom(random));
+        ComponentsHandler.saveItemComponent(itemStack, comp);
         return itemStack;
     }
     public TurretDrop drawRandomTurret(QualityType type) {

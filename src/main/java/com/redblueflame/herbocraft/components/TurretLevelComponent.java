@@ -7,12 +7,13 @@ import net.minecraft.nbt.CompoundTag;
 
 import java.util.Random;
 
-public class TurretLevelComponent implements LevelComponent, CopyableComponent<LevelComponent> {
+public class TurretLevelComponent implements LevelComponent {
     private int health = 5;
     private float attackSpeed = 1;
     private int damage = 2;
     private int durability = 200;
     private int stability = 255;
+    private boolean dirty = true;
     private boolean sterile = false;
 
     public static TurretLevelComponent getRandomStats(short level) {
@@ -26,7 +27,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         health = 5;
         attackSpeed = 1;
         damage = 2;
-        durability = 5;
+        durability = 200;
         stability = 255;
         sterile = false;
     }
@@ -63,18 +64,19 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     private void addLevelToStat(String name) {
         switch (name) {
             case "Health":
-                health += 4;
+                health += 1;
                 break;
             case "AttackSpeed":
-                attackSpeed += 0.2;
+                attackSpeed += 0.1;
                 break;
             case "Damage":
-                damage += 1;
+                damage += 0.5;
                 break;
             case "Durability":
                 durability += 1;
                 break;
         }
+        dirty = true;
     }
 
     @Override
@@ -85,9 +87,9 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         target.setAttackSpeed(Math.min(this.attackSpeed, other.getAttackSpeed()) + rdm.nextFloat()*(sep_attack_speed));
         sep = Math.abs(this.damage - other.getDamage());
         target.setDamage(Math.min(this.damage, other.getDamage()) + rdm.nextInt(sep+1));
-        sep = Math.abs(this.durability - other.getDurability());
-        target.setDurability(Math.min(this.durability, other.getDurability()) + rdm.nextInt((sep/4)+1));
+        target.setDurability(Math.min(this.durability, other.getDurability()) + rdm.nextInt(50));
         target.setStability(200 + rdm.nextInt(55));
+        dirty = true;
     }
 
     @Override
@@ -98,6 +100,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     @Override
     public void setHealth(int health) {
         this.health = health;
+        dirty = true;
     }
 
     @Override
@@ -108,6 +111,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     @Override
     public void setAttackSpeed(float attackSpeed) {
         this.attackSpeed = attackSpeed;
+        dirty = true;
     }
 
     @Override
@@ -118,6 +122,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     @Override
     public void setDamage(int damage) {
         this.damage = damage;
+        dirty = true;
     }
 
     @Override
@@ -128,6 +133,7 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     @Override
     public void setDurability(int durability) {
         this.durability = durability;
+        dirty = true;
     }
 
     @Override
@@ -143,11 +149,13 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
     @Override
     public void setSterile(boolean sterile) {
         this.sterile = sterile;
+        dirty = true;
     }
 
     @Override
     public void setStability(int stability) {
         this.stability = stability;
+        dirty = true;
     }
 
     @Override
@@ -171,12 +179,6 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         return tag;
     }
 
-    @Override
-    public ComponentType<LevelComponent> getComponentType() {
-        return HerboCraft.LEVELLING;
-    }
-
-    @Override
     public void copyFrom(LevelComponent other) {
         this.health = other.getHealth();
         this.durability = other.getDurability();
@@ -184,5 +186,25 @@ public class TurretLevelComponent implements LevelComponent, CopyableComponent<L
         this.attackSpeed = other.getAttackSpeed();
         this.sterile = other.isSterile();
         this.stability = other.getStability();
+    }
+
+    @Override
+    public String toString() {
+        return "TurretLevelComponent{" +
+                "health=" + health +
+                ", attackSpeed=" + attackSpeed +
+                ", damage=" + damage +
+                ", durability=" + durability +
+                ", stability=" + stability +
+                ", dirty=" + dirty +
+                ", sterile=" + sterile +
+                '}';
+    }
+
+    public boolean isDirty() {
+        return dirty;
+    }
+    public void clearDirty() {
+        dirty = false;
     }
 }

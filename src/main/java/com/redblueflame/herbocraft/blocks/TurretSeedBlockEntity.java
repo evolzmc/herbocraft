@@ -13,7 +13,7 @@ public class TurretSeedBlockEntity extends BlockEntity {
     private LevelComponent component;
     public TurretSeedBlockEntity() {
         super(HerboCraft.TURRET_SEED_BLOCK_ENTITY);
-        component = new TurretLevelComponent();
+        component = null;
     }
     public LevelComponent getComponent() {
         return component;
@@ -30,7 +30,9 @@ public class TurretSeedBlockEntity extends BlockEntity {
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
-        component.toTag(tag);
+        if (component != null) {
+            component.toTag(tag);
+        }
         return tag;
     }
 }

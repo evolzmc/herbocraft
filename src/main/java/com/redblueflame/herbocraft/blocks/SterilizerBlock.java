@@ -29,6 +29,14 @@ public class SterilizerBlock extends BlockWithEntity implements BlockEntityProvi
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
+            // Sync the server with client for the state of the block.
+            AbstractProgressBlockEntity blockEntity = (AbstractProgressBlockEntity) world.getBlockEntity(pos);
+            if (blockEntity == null) {
+                HerboCraft.LOGGER.error("There were an error while getting the blockentity. Please check your input.");
+                return ActionResult.PASS;
+            }
+            blockEntity.sendBlockProgressPacket();
+
             ContainerProviderRegistry.INSTANCE.openContainer(HerboCraft.STERILIZER_CONTAINER, player, (buffer) -> {
                 buffer.writeText(new TranslatableText(this.getTranslationKey()));
                 buffer.writeBlockPos(pos);

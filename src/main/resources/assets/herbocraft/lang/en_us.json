@@ -33,6 +33,7 @@
 	"level_tooltips.stability.high": "High",
 	"level_tooltips.stability.extreme": "Extreme",
 	"level_tooltips.stability.unknown": "Unknown",
+	"level_tooltips.unknown": "The plant seems totally new to you.",
 	"level_tooltips.sterile.true": "Sterile !",
 	"entity.herbocraft.turret_base": "Basic Turret",
 	"entity.herbocraft.snow_turret": "Snow Turret",

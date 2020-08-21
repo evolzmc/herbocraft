@@ -9,14 +9,14 @@ import net.minecraft.tag.Tag;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.apache.http.client.utils.Idn;
-import spinnery.client.screen.BaseContainerScreen;
+import spinnery.client.screen.BaseHandledScreen;
 import spinnery.widget.*;
 import spinnery.widget.api.Position;
 import spinnery.widget.api.Size;
 
 import java.util.Collection;
 
-public class SterilizerInterface extends BaseContainerScreen<SterilizerBlockContainer> {
+public class SterilizerInterface extends BaseHandledScreen<SterilizerBlockContainer> {
     private WVerticalLoadingBar img;
     public SterilizerInterface(SterilizerBlockContainer container) {
         super(container.name, container, container.player);
@@ -37,13 +37,13 @@ public class SterilizerInterface extends BaseContainerScreen<SterilizerBlockCont
 
         img = mainPanel.createChild(WVerticalLoadingBar::new, Position.of(mainPanel, ((mainPanel.getWidth()) / 2) - 7, 55-6-14*2.5F, 2), Size.of(14, 14*2.5F)).setParent(mainInterface);
         img.setTexture(new Identifier(HerboCraft.name, "textures/ui/filled.png"));
-        img.setState(container.entity.progression);
+        img.setState((short) container.entity.state);
         mainPanel.add(base);
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
-        img.setState(getContainer().entity.progression);
+        img.setState((short) getScreenHandler().entity.state);
         super.render(matrices, mouseX, mouseY, tickDelta);
     }
 }

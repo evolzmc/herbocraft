@@ -3,6 +3,7 @@
   "package": "com.redblueflame.herbocraft.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "FixTagInit"
   ],
   "client": [
     "EntitySpawningHandlingMixin"

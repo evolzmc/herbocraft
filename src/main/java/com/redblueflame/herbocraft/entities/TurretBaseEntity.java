@@ -23,8 +23,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.mob.Monster;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -32,18 +32,20 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob {
+public class TurretBaseEntity extends PathAwareEntity implements RangedAttackMob {
     private static final TrackedData<Byte> TURRET_BASE_FLAGS;
     private Goal projectileGoal;
+    private LevelComponent component;
     public float damage = 40F;
 
     static {
         TURRET_BASE_FLAGS = DataTracker.registerData(TurretBaseEntity.class, TrackedDataHandlerRegistry.BYTE);
     }
 
-    public TurretBaseEntity(EntityType<? extends MobEntityWithAi> entityType, World world) {
+    public TurretBaseEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         projectileGoal = new ProjectileAttackGoal(this, 0D, 10, 40F);
+        component = new TurretLevelComponent();
     }
 
     public static DefaultAttributeContainer.Builder createBaseTurretAttributes() {
@@ -53,7 +55,7 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2D);
     }
 
-    public void setAttributes(LevelComponent component) {
+    public void setAttributes() {
         this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(component.getHealth());
         this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED).setBaseValue(component.getAttackSpeed());
         this.goalSelector.remove(projectileGoal);
@@ -78,9 +80,6 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(TURRET_BASE_FLAGS, (byte) 16);
-    }
-    public void initComponents(ComponentContainer<Component> components) {
-        components.put(HerboCraft.LEVELLING, new EntityTurretComponent(this, (short) 5));
     }
     @Override
     public void attack(LivingEntity target, float pullProgress) {
@@ -151,6 +150,25 @@ public class TurretBaseEntity extends MobEntityWithAi implements RangedAttackMob
     @Override
     public void readCustomDataFromTag(CompoundTag tag) {
         super.readCustomDataFromTag(tag);
-        setAttributes(HerboCraft.LEVELLING.get(this));
+        // Extract the component
+        LevelComponent comp = new TurretLevelComponent();
+        comp.fromTag(tag.getCompound("LevelComponent"));
+        component = comp;
+        setAttributes();
+    }
+
+    @Override
+    public void writeCustomDataToTag(CompoundTag tag) {
+        super.writeCustomDataToTag(tag);
+        CompoundTag subTag = tag.getCompound("LevelComponent");
+        tag.put("LevelComponent", component.toTag(subTag));
+    }
+
+    public LevelComponent getComponent() {
+        return component;
+    }
+
+    public void setComponent(LevelComponent component) {
+        this.component = component;
     }
 }

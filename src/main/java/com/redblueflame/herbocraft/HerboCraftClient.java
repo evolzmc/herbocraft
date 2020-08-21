@@ -1,5 +1,6 @@
 package com.redblueflame.herbocraft;
 
+import com.redblueflame.herbocraft.blocks.AbstractProgressBlockEntity;
 import com.redblueflame.herbocraft.entities.renderer.SnowTurretRenderer;
 import com.redblueflame.herbocraft.entities.renderer.TurretBaseRenderer;
 import com.redblueflame.herbocraft.entities.renderer.WitherTurretRenderer;
@@ -59,5 +60,43 @@ public class HerboCraftClient implements ClientModInitializer {
                 }
             });
         });
+        // Register the initial load
+        ClientSidePacketRegistry.INSTANCE.register(HerboCraftPackets.STATE_CHANGE, ((packetContext, packetByteBuf) -> {
+            BlockPos pos = packetByteBuf.readBlockPos();
+            boolean isWorking = packetByteBuf.readBoolean();
+            int targetWork = packetByteBuf.readInt();
+            packetContext.getTaskQueue().execute(() -> {
+                assert MinecraftClient.getInstance().world != null;
+                AbstractProgressBlockEntity blockEntity = (AbstractProgressBlockEntity) MinecraftClient.getInstance().world.getBlockEntity(pos);
+                if (blockEntity == null) {
+                    HerboCraft.LOGGER.error("The block entity you're trying to change does not exist on the client !");
+                    return;
+                }
+                if (isWorking) {
+                    blockEntity.isWorking = true;
+                    blockEntity.targetWork = targetWork;
+                } else {
+                    blockEntity.resetWork();
+                }
+            });
+        }));
+        ClientSidePacketRegistry.INSTANCE.register(HerboCraftPackets.SEND_STATUS, ((packetContext, packetByteBuf) -> {
+            BlockPos pos = packetByteBuf.readBlockPos();
+            int targetWork = packetByteBuf.readInt();
+            int currentWork = packetByteBuf.readInt();
+            packetContext.getTaskQueue().execute(() -> {
+                assert MinecraftClient.getInstance().world != null;
+                AbstractProgressBlockEntity blockEntity = (AbstractProgressBlockEntity) MinecraftClient.getInstance().world.getBlockEntity(pos);
+                if (blockEntity == null) {
+                    HerboCraft.LOGGER.error("The block entity you're trying to change does nos exist on the client !");
+                    return;
+                }
+                blockEntity.targetWork = targetWork;
+                blockEntity.currentWork = currentWork;
+                if (targetWork != 0) {
+                    blockEntity.state = (int) ((targetWork/(float)currentWork)*255F);
+                }
+            });
+        }));
     }
 }
