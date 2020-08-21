@@ -9,14 +9,14 @@ import net.minecraft.tag.Tag;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.apache.http.client.utils.Idn;
-import spinnery.client.screen.BaseContainerScreen;
+import spinnery.client.screen.BaseHandledScreen;
 import spinnery.widget.*;
 import spinnery.widget.api.Position;
 import spinnery.widget.api.Size;
 
 import java.util.Collection;
 
-public class SterilizerInterface extends BaseContainerScreen<SterilizerBlockContainer> {
+public class SterilizerInterface extends BaseHandledScreen<SterilizerBlockContainer> {
     private WVerticalLoadingBar img;
     public SterilizerInterface(SterilizerBlockContainer container) {
         super(container.name, container, container.player);
@@ -43,7 +43,7 @@ public class SterilizerInterface extends BaseContainerScreen<SterilizerBlockCont
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
-        img.setState((short) getContainer().entity.state);
+        img.setState((short) getScreenHandler().entity.state);
         super.render(matrices, mouseX, mouseY, tickDelta);
     }
 }

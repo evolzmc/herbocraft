@@ -44,6 +44,7 @@ public class SterilizerBlockEntity extends AbstractProgressBlockEntity {
     public void finishWork() {
         LevelComponent comp = ComponentsHandler.getItemComponent(inventory.getStack(0));
         comp.setSterile(true);
+        ComponentsHandler.saveItemComponent(inventory.getStack(0), comp);
     }
 
     @Override
@@ -83,9 +84,7 @@ public class SterilizerBlockEntity extends AbstractProgressBlockEntity {
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         inventory = InventoryUtilities.read(tag);
-        if (inventory == null) {
-            inventory = new BaseInventory(1);
-        }
-        currentItem = inventory.getStack(0);
+        if (inventory != null)
+            currentItem = inventory.getStack(0);
     }
 }

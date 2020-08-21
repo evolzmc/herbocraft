@@ -6,12 +6,12 @@ import com.redblueflame.herbocraft.blocks.ReproducerBlockContainer;
 import com.redblueflame.herbocraft.blocks.SterilizerBlockContainer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import spinnery.client.screen.BaseContainerScreen;
+import spinnery.client.screen.BaseHandledScreen;
 import spinnery.widget.*;
 import spinnery.widget.api.Position;
 import spinnery.widget.api.Size;
 
-public class ReproducerBlockInterface extends BaseContainerScreen<ReproducerBlockContainer> {
+public class ReproducerBlockInterface extends BaseHandledScreen<ReproducerBlockContainer> {
     private WHorizontalLoadingBar img;
     public ReproducerBlockInterface(ReproducerBlockContainer linkedContainer) {
         super(linkedContainer.name, linkedContainer, linkedContainer.player);
@@ -42,7 +42,7 @@ public class ReproducerBlockInterface extends BaseContainerScreen<ReproducerBloc
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
-        img.setState((short) getContainer().entity.state);
+        img.setState((short) getScreenHandler().entity.state);
         super.render(matrices, mouseX, mouseY, tickDelta);
     }
 

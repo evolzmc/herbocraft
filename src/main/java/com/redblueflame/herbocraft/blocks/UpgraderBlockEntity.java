@@ -54,17 +54,19 @@ public class UpgraderBlockEntity extends AbstractProgressBlockEntity {
             return;
         }
         ItemStack item = inventory.getStack(10);
-        Optional<LevelComponent> comp = ComponentsHandler.getOptionalItemComponent(item);
-        if (!comp.isPresent()) {
+        Optional<LevelComponent> comp_opt = ComponentsHandler.getOptionalItemComponent(item);
+        if (!comp_opt.isPresent()) {
             // The component is not present, we do nothing.
             resetWork();
             return;
         }
-        comp.get().addLevels(1);
-        comp.get().setStability(comp.get().getStability()-25);
+        LevelComponent comp = comp_opt.get();
+        comp.addLevels(1);
+        comp.setStability(comp.getStability()-25);
+        ComponentsHandler.saveItemComponent(item, comp);
 
         // Move out the item if it's fullt upgraded
-        if (comp.get().getStability() <= 25) {
+        if (comp_opt.get().getStability() <= 25) {
             // Move the item to an output spot
             int target = getFirstAvailableSlot();
             if (target == -1) {
@@ -106,10 +108,8 @@ public class UpgraderBlockEntity extends AbstractProgressBlockEntity {
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         inventory = InventoryUtilities.read(tag);
-        if (inventory == null) {
-            inventory = new BaseInventory(20);
-        }
-        currentItem = inventory.getStack(10);
+        if (inventory != null)
+            currentItem = inventory.getStack(10);
     }
 
     private boolean isAccepted(ItemStack item) {

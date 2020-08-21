@@ -78,10 +78,8 @@ public class GrowthControllerBlockEntity extends AbstractProgressBlockEntity {
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         inventory = InventoryUtilities.read(tag);
-        if (inventory == null) {
-            inventory = new BaseInventory(10);
-        }
-        currentItem = inventory.getStack(0).getItem();
+        if (inventory != null)
+            currentItem = inventory.getStack(0).getItem();
     }
 
     // region Quality types

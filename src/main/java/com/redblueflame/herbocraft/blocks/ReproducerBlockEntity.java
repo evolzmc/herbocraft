@@ -45,9 +45,9 @@ public class ReproducerBlockEntity extends AbstractProgressBlockEntity {
     @Override
     public void finishWork() {
         ItemStack item = new ItemStack(currentItem1.getItem(), 1);
-        LevelComponent item1 = ComponentsHandler.getItemComponent(inventory.getStack(0));
-        LevelComponent item2 = ComponentsHandler.getItemComponent(inventory.getStack(1));
-        LevelComponent target = ComponentsHandler.getItemComponent(item);
+        LevelComponent item1 = ComponentsHandler.getItemComponent(inventory.getStack(0), true);
+        LevelComponent item2 = ComponentsHandler.getItemComponent(inventory.getStack(1),  true);
+        LevelComponent target = ComponentsHandler.createItemComponent(item);
         item1.reproduceWith(item2, target, new Random());
         int slot = getFirstAvailableSlot();
         if (slot == -1) {
@@ -92,11 +92,10 @@ public class ReproducerBlockEntity extends AbstractProgressBlockEntity {
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         inventory = InventoryUtilities.read(tag);
-        if (inventory == null) {
-            inventory = new BaseInventory(11);
+        if (inventory != null) {
+            currentItem1 = inventory.getStack(0);
+            currentItem2 = inventory.getStack(1);
         }
-        currentItem1 = inventory.getStack(0);
-        currentItem2 = inventory.getStack(1);
     }
 
     // region Quality types

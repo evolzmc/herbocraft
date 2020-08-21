@@ -5,12 +5,12 @@ import com.redblueflame.herbocraft.blocks.SterilizerBlockContainer;
 import com.redblueflame.herbocraft.blocks.UpgraderBlockContainer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import spinnery.client.screen.BaseContainerScreen;
+import spinnery.client.screen.BaseHandledScreen;
 import spinnery.widget.*;
 import spinnery.widget.api.Position;
 import spinnery.widget.api.Size;
 
-public class UpgraderBlockInterface  extends BaseContainerScreen<UpgraderBlockContainer> {
+public class UpgraderBlockInterface  extends BaseHandledScreen<UpgraderBlockContainer> {
     private WVerticalLoadingBar spinner;
     private short spinner_state;
     private WVerticalLoadingBar progress;
@@ -70,14 +70,14 @@ public class UpgraderBlockInterface  extends BaseContainerScreen<UpgraderBlockCo
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float tickDelta) {
         // Add spinner state
-        if (getContainer().entity.isWorking) {
+        if (getScreenHandler().entity.isWorking) {
             spinner_state += 2;
             if (spinner_state > 255) {
                 spinner_state = 0;
             }
         }
         this.spinner.setState(spinner_state);
-        this.progress.setState((short) getContainer().entity.state);
+        this.progress.setState((short) getScreenHandler().entity.state);
         super.render(matrices, mouseX, mouseY, tickDelta);
     }
 }
