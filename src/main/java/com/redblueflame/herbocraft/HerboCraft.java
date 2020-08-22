@@ -19,6 +19,7 @@ import nerdhub.cardinal.components.api.ComponentRegistry;
 import nerdhub.cardinal.components.api.ComponentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -213,14 +214,14 @@ public class HerboCraft implements ModInitializer {
         UPGRADER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(name, "upgrader"), BlockEntityType.Builder.create(UpgraderBlockEntity::new, UPGRADER).build(null));
 
         // Register containers
-        ScreenHandlerRegistry.registerExtended(STERILIZER_CONTAINER,
-                (id, inv, buf) -> new SterilizerBlockContainer(id, buf.readText(), inv, buf.readBlockPos(), inv.player.world));
-        ScreenHandlerRegistry.registerExtended(GROWTH_CONTROLLER_CONTAINER,
-                (syncId, inv, buf) -> new GrowthControllerContainer(syncId, buf.readText(), inv, buf.readBlockPos(), inv.player.world));
-        ScreenHandlerRegistry.registerExtended(REPRODUCER_CONTAINER,
-                (syncId, inv, buf) -> new ReproducerBlockContainer(syncId, buf.readText(), inv, buf.readBlockPos(), inv.player.world));
-        ScreenHandlerRegistry.registerExtended(UPGRADER_CONTAINER,
-                (syncId, inv, buf) -> new UpgraderBlockContainer(syncId, buf.readText(), inv, buf.readBlockPos(), inv.player.world));
+        ContainerProviderRegistry.INSTANCE.registerFactory(STERILIZER_CONTAINER,
+                (syncId, id, player, buf) -> new SterilizerBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
+        ContainerProviderRegistry.INSTANCE.registerFactory(GROWTH_CONTROLLER_CONTAINER,
+                (syncId, id, player, buf) -> new GrowthControllerContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
+        ContainerProviderRegistry.INSTANCE.registerFactory(REPRODUCER_CONTAINER,
+                (syncId, id, player, buf) -> new ReproducerBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
+        ContainerProviderRegistry.INSTANCE.registerFactory(UPGRADER_CONTAINER,
+                (syncId, id, player, buf) -> new UpgraderBlockContainer(syncId, buf.readText(), player.inventory, buf.readBlockPos(), player.world));
         // Register recipes
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(name, "patchouli_book"), new PatchouliBookRecipe.Serializer());
 
