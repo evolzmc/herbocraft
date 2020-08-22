@@ -1,0 +1,50 @@
+{
+  "credit": "Made with Blockbench",
+  "texture_size": [32, 32],
+  "textures": {
+    "0": "herbocraft:block/cellulose_core",
+    "particle": "herbocraft:block/cellulose_core"
+  },
+  "elements": [
+    {
+      "name": "pipe_connect",
+      "from": [6.5, 6.5, 2],
+      "to": [9.5, 9.5, 6],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 4]},
+      "faces": {
+        "north": {"uv": [8, 0, 9.5, 3], "texture": "#0"},
+        "east": {"uv": [8, 0, 9.5, 3], "rotation": 90, "texture": "#0"},
+        "south": {"uv": [8, 0, 9.5, 3], "texture": "#0"},
+        "west": {"uv": [8, 0, 9.5, 3], "rotation": 270, "texture": "#0"},
+        "up": {"uv": [8, 0, 9.5, 3], "texture": "#0"},
+        "down": {"uv": [8, 0, 9.5, 3.1575], "texture": "#0"}
+      }
+    },
+    {
+      "from": [2, 2, 0],
+      "to": [14, 14, 1],
+      "rotation": {"angle": 0, "axis": "y", "origin": [15, 15, 8]},
+      "faces": {
+        "north": {"uv": [0, 8, 6, 14], "texture": "#0"},
+        "east": {"uv": [9.5, 0, 10, 4], "texture": "#0"},
+        "south": {"uv": [0, 8, 6, 14], "texture": "#0"},
+        "west": {"uv": [9.5, 0, 10, 4], "texture": "#0"},
+        "up": {"uv": [12, 15.5, 16, 16], "texture": "#0"},
+        "down": {"uv": [12, 15.5, 16, 16], "texture": "#0"}
+      }
+    },
+    {
+      "from": [4, 4, 1],
+      "to": [12, 12, 2],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 1.5]},
+      "faces": {
+        "north": {"uv": [0, 8, 6, 14], "texture": "#0"},
+        "east": {"uv": [10.5, 0, 11, 4], "texture": "#0"},
+        "south": {"uv": [0, 8, 6, 14], "texture": "#0"},
+        "west": {"uv": [10.5, 0, 11, 4], "texture": "#0"},
+        "up": {"uv": [12, 15, 16, 15.5], "texture": "#0"},
+        "down": {"uv": [12, 15, 16, 15.5], "texture": "#0"}
+      }
+    }
+  ]
+}

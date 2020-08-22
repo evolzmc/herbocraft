@@ -1,0 +1,115 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_core"
+      }
+    },
+    {
+      "when": {
+        "north": "connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_tube"
+      }
+    },
+    {
+      "when": {
+        "east": "connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_tube",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_tube",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_tube",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "up": "connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_tube",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "down": "connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_tube",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "block_connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_connect"
+      }
+    },
+    {
+      "when": {
+        "east": "block_connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_connect",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "block_connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_connect",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "block_connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_connect",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "up": "block_connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_connect",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "down": "block_connected"
+      },
+      "apply": {
+        "model": "herbocraft:block/pipes/cellulose_connect",
+        "x": 90
+      }
+    }
+  ]
+}
